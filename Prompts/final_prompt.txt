@@ -1,38 +1,34 @@
-You are an expert software tester tasked with reviewing and improving a set of test cases generated from a project document. Your goal is to ensure the test cases are exhaustive, correct, and aligned with the project requirements. Use Agentic Pattern Reflection to critically analyze the test cases and provide insights for improvement.
+You are tasked with re-creating test matrices based on a project document, previously generated test cases, a reflection on the generation performance, and potential areas for additional testing. Your goal is to create comprehensive and improved test matrices that address the issues identified in the reflection and incorporate the suggested areas for additional testing.
 
-First, review the project document. Then, examine the generated test cases from the previous message
+First, review the following information:
 
+1. Project Document, 2. Previously Generated Test Cases, 3. Reflection on Generation Performance, 4. Potential Areas for Additional Testing in earlier messages:
 
-Analyze the test cases by considering the following aspects:
-1. Completeness: Do the test cases cover all the requirements and functionalities described in the project document?
-2. Correctness: Are the test cases accurately reflecting the expected behavior of the system?
-3. Edge cases: Have all possible edge cases and boundary conditions been considered?
-4. Negative testing: Are there sufficient test cases for error handling and unexpected inputs?
-5. Test case structure: Are the test cases well-organized, clear, and easy to understand?
+Analyze the provided information, paying special attention to the reflection and the potential areas for additional testing. Consider how you can address the issues mentioned in the reflection and incorporate the suggested areas for additional testing into your new test matrices.
 
-Reflect on your analysis and provide your insights in the following format:
+Create new test matrices that:
+1. Address the shortcomings identified in the reflection
+2. Incorporate the potential areas for additional testing
+3. Maintain the strengths of the previously generated test cases
+4. Ensure comprehensive coverage of the project requirements
 
-<reflection>
-1. Completeness assessment:
-   [Provide your thoughts on how well the test cases cover the project requirements]
+When creating your test matrices, follow these guidelines:
+- Organize tests into logical categories or modules
+- Ensure each test case is clear, concise, and testable
+- Include a mix of positive and negative test scenarios
+- Consider edge cases and boundary conditions
+- Prioritize tests based on their importance and potential impact
 
-2. Correctness evaluation:
-   [Discuss any discrepancies or inaccuracies you've identified in the test cases]
+Present your new test matrices in a structured format, using appropriate headings and subheadings. For each test case, include:
+- A unique identifier
+- A brief description of the test
+- The expected outcome
+- Any preconditions or setup required
 
-3. Edge case coverage:
-   [Highlight any missing or inadequately covered edge cases]
+Format your response as JSON ONLY. This is to ensure that your answer can be dumped directly into a JSON file:
 
-4. Negative testing assessment:
-   [Evaluate the sufficiency of error handling and unexpected input testing]
+<test_matrices>
+[Your newly created test matrices go here]
+</test_matrices>
 
-5. Test case structure feedback:
-   [Comment on the organization and clarity of the test cases]
-
-6. Suggestions for improvement:
-   [List specific recommendations to enhance the test suite]
-
-7. Overall assessment:
-   [Provide a summary of your evaluation and any final recommendations]
-</reflection>
-
-Your reflection should be thorough, critical, and constructive. Focus on identifying areas for improvement and providing actionable suggestions to enhance the quality and coverage of the test cases.
+Remember to be thorough, clear, and concise in your test matrix creation.
