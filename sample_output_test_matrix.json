@@ -1,0 +1,638 @@
+{
+  "File Operations": [
+    {
+      "Test ID": "FO-001",
+      "Test Case Description": "Create a new empty document",
+      "Test Steps": "1. Launch application\n2. Select option to create new document",
+      "Expected Result": "A new empty document is created successfully",
+      "Requirement ID": "DEMO-SRS-53",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "FO-002",
+      "Test Case Description": "Save changes before closing document",
+      "Test Steps": "1. Make changes to document\n2. Attempt to close document",
+      "Expected Result": "Application prompts user to save changes before closing",
+      "Requirement ID": "DEMO-SRS-54",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "FO-003",
+      "Test Case Description": "Open document from file",
+      "Test Steps": "1. Launch application\n2. Select option to open document\n3. Choose a valid file",
+      "Expected Result": "Document is opened successfully from the chosen file",
+      "Requirement ID": "DEMO-SRS-56",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "FO-004",
+      "Test Case Description": "Save document to file",
+      "Test Steps": "1. Open a document\n2. Select option to save document\n3. Choose location and filename",
+      "Expected Result": "Document is saved successfully to the specified location",
+      "Requirement ID": "DEMO-SRS-59",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "FO-005",
+      "Test Case Description": "Create document template",
+      "Test Steps": "1. Open a document\n2. Select option to create template\n3. Choose location and filename",
+      "Expected Result": "Template is created successfully with structure and attributes preserved",
+      "Requirement ID": "DEMO-SRS-61",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "FO-006",
+      "Test Case Description": "Create new document from template",
+      "Test Steps": "1. Select option to create document from template\n2. Choose a template file",
+      "Expected Result": "New document is created with structure and attributes from template",
+      "Requirement ID": "DEMO-SRS-63",
+      "Priority": "Medium"
+    }
+  ],
+  "Import/Export": [
+    {
+      "Test ID": "IE-001",
+      "Test Case Description": "Import MS Word document",
+      "Test Steps": "1. Select import option\n2. Choose a MS Word document\n3. Complete import process",
+      "Expected Result": "Document is imported with structure, formatting, and images preserved",
+      "Requirement ID": "DEMO-SRS-72",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "IE-002",
+      "Test Case Description": "Import MS Excel table of requirements",
+      "Test Steps": "1. Select import option\n2. Choose a MS Excel file\n3. Complete import process",
+      "Expected Result": "Requirements are imported with headings, levels, descriptions, and attribute values preserved",
+      "Requirement ID": "DEMO-SRS-73",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "IE-003",
+      "Test Case Description": "Export document to HTML",
+      "Test Steps": "1. Open a document\n2. Select export to HTML option\n3. Choose location and filename",
+      "Expected Result": "Document is exported to HTML format correctly",
+      "Requirement ID": "DEMO-SRS-76",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "IE-004",
+      "Test Case Description": "Export requirements to CSV",
+      "Test Steps": "1. Open a document\n2. Select export to CSV option\n3. Choose location and filename",
+      "Expected Result": "Requirements are exported to CSV format correctly",
+      "Requirement ID": "DEMO-SRS-77",
+      "Priority": "Medium"
+    }
+  ],
+  "Document View": [
+    {
+      "Test ID": "DV-001",
+      "Test Case Description": "Display table of contents",
+      "Test Steps": "1. Open a document with multiple sections\n2. Observe table of contents",
+      "Expected Result": "Table of contents displays section headings in hierarchical structure",
+      "Requirement ID": "DEMO-SRS-80",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "DV-002",
+      "Test Case Description": "Navigate using table of contents",
+      "Test Steps": "1. Open a document with multiple sections\n2. Click on a section in table of contents",
+      "Expected Result": "Application focuses on the selected section in requirements table",
+      "Requirement ID": "DEMO-SRS-81",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "DV-003",
+      "Test Case Description": "Display requirements table with all columns",
+      "Test Steps": "1. Open a document\n2. Observe requirements table",
+      "Expected Result": "Requirements table displays ID, Description, Discussion, Links and custom attribute columns",
+      "Requirement ID": "DEMO-SRS-83",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "DV-004",
+      "Test Case Description": "Change column width",
+      "Test Steps": "1. Open a document\n2. Drag column divider to change width",
+      "Expected Result": "Column width changes as expected",
+      "Requirement ID": "DEMO-SRS-88",
+      "Priority": "Low"
+    },
+    {
+      "Test ID": "DV-005",
+      "Test Case Description": "Reorder table columns",
+      "Test Steps": "1. Open a document\n2. Drag column header to new position",
+      "Expected Result": "Columns are reordered as expected",
+      "Requirement ID": "DEMO-SRS-190",
+      "Priority": "Low"
+    },
+    {
+      "Test ID": "DV-006",
+      "Test Case Description": "Show/hide table columns",
+      "Test Steps": "1. Open a document\n2. Use column visibility controls to hide a column\n3. Use controls to show the column again",
+      "Expected Result": "Columns can be hidden and shown as expected (except ID column)",
+      "Requirement ID": "DEMO-SRS-89",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "DV-007",
+      "Test Case Description": "Sort table columns",
+      "Test Steps": "1. Open a document\n2. Click column header to sort",
+      "Expected Result": "Table is sorted by the selected column (except Discussion and Links columns)",
+      "Requirement ID": "DEMO-SRS-90",
+      "Priority": "Medium"
+    }
+  ],
+  "Detailed Information": [
+    {
+      "Test ID": "DI-001",
+      "Test Case Description": "Show/hide detailed information pane",
+      "Test Steps": "1. Open a document\n2. Select a requirement\n3. Toggle detailed information pane",
+      "Expected Result": "Detailed information pane can be shown and hidden",
+      "Requirement ID": "DEMO-SRS-92",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "DI-002",
+      "Test Case Description": "Display custom attributes",
+      "Test Steps": "1. Open a document\n2. Select a requirement with custom attributes\n3. Show custom attributes pane",
+      "Expected Result": "All assigned custom attributes are displayed correctly",
+      "Requirement ID": "DEMO-SRS-93",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "DI-003",
+      "Test Case Description": "Display requirement comments",
+      "Test Steps": "1. Open a document\n2. Select a requirement with comments\n3. Show discussion pane",
+      "Expected Result": "All comments are displayed in chronological order",
+      "Requirement ID": "DEMO-SRS-94",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "DI-004",
+      "Test Case Description": "Expand/collapse comments",
+      "Test Steps": "1. Open a document\n2. Select a requirement with comments\n3. Show discussion pane\n4. Expand and collapse comments",
+      "Expected Result": "Comments can be expanded and collapsed individually and collectively",
+      "Requirement ID": "DEMO-SRS-96",
+      "Priority": "Low"
+    },
+    {
+      "Test ID": "DI-005",
+      "Test Case Description": "Display traceability links",
+      "Test Steps": "1. Open a document\n2. Select a requirement with links\n3. Show links pane",
+      "Expected Result": "All traceability links are displayed grouped by link types",
+      "Requirement ID": "DEMO-SRS-99",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "DI-006",
+      "Test Case Description": "Navigate using traceability links",
+      "Test Steps": "1. Open a document\n2. Select a requirement with links\n3. Show links pane\n4. Click on a link",
+      "Expected Result": "Application focuses on the linked requirement",
+      "Requirement ID": "DEMO-SRS-142",
+      "Priority": "High"
+    }
+  ],
+  "Document Structure Editing": [
+    {
+      "Test ID": "DS-001",
+      "Test Case Description": "Create new requirement",
+      "Test Steps": "1. Open a document\n2. Select a section\n3. Create new requirement",
+      "Expected Result": "New requirement is created with unique ID",
+      "Requirement ID": "DEMO-SRS-106, DEMO-SRS-107",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "DS-002",
+      "Test Case Description": "Copy requirements within document",
+      "Test Steps": "1. Open a document\n2. Select requirements\n3. Copy to another section",
+      "Expected Result": "Requirements are copied correctly",
+      "Requirement ID": "DEMO-SRS-108",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "DS-003",
+      "Test Case Description": "Move requirements within document",
+      "Test Steps": "1. Open a document\n2. Select requirements\n3. Move to another section",
+      "Expected Result": "Requirements are moved correctly",
+      "Requirement ID": "DEMO-SRS-109",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "DS-004",
+      "Test Case Description": "Mark requirements as deleted",
+      "Test Steps": "1. Open a document\n2. Select requirements\n3. Mark as deleted",
+      "Expected Result": "Requirements are marked as deleted",
+      "Requirement ID": "DEMO-SRS-110",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "DS-005",
+      "Test Case Description": "Undelete requirements",
+      "Test Steps": "1. Open a document\n2. Select deleted requirements\n3. Undelete",
+      "Expected Result": "Requirements are restored",
+      "Requirement ID": "DEMO-SRS-111",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "DS-006",
+      "Test Case Description": "Permanently remove deleted requirements",
+      "Test Steps": "1. Open a document\n2. Select deleted requirements\n3. Permanently remove",
+      "Expected Result": "Requirements are permanently removed from document",
+      "Requirement ID": "DEMO-SRS-112",
+      "Priority": "Medium"
+    }
+  ],
+  "Requirement Editing": [
+    {
+      "Test ID": "RE-001",
+      "Test Case Description": "Edit section heading",
+      "Test Steps": "1. Open a document\n2. Select a section\n3. Edit heading",
+      "Expected Result": "Section heading is updated correctly",
+      "Requirement ID": "DEMO-SRS-114",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "RE-002",
+      "Test Case Description": "Edit requirement description",
+      "Test Steps": "1. Open a document\n2. Select a requirement\n3. Edit description",
+      "Expected Result": "Requirement description is updated correctly",
+      "Requirement ID": "DEMO-SRS-115",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "RE-003",
+      "Test Case Description": "Paste HTML content into description",
+      "Test Steps": "1. Copy HTML content from external application\n2. Select a requirement\n3. Paste into description",
+      "Expected Result": "HTML content is pasted correctly with formatting preserved",
+      "Requirement ID": "DEMO-SRS-116",
+      "Priority": "Medium"
+    }
+  ],
+  "Custom Attributes": [
+    {
+      "Test ID": "CA-001",
+      "Test Case Description": "Define custom attribute",
+      "Test Steps": "1. Open a document\n2. Access custom attributes management\n3. Define new attribute with ID",
+      "Expected Result": "New custom attribute is created with unique ID",
+      "Requirement ID": "DEMO-SRS-119",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "CA-002",
+      "Test Case Description": "Set custom attribute type",
+      "Test Steps": "1. Open a document\n2. Access custom attributes management\n3. Set attribute type",
+      "Expected Result": "Attribute type is set correctly",
+      "Requirement ID": "DEMO-SRS-121",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "CA-003",
+      "Test Case Description": "Set multiple values for enum attribute",
+      "Test Steps": "1. Open a document\n2. Select a requirement\n3. Set multiple values for enum attribute",
+      "Expected Result": "Multiple values are set correctly for enum attribute",
+      "Requirement ID": "DEMO-SRS-191",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "CA-004",
+      "Test Case Description": "Change custom attribute type with automatic conversion",
+      "Test Steps": "1. Open a document\n2. Access custom attributes management\n3. Change attribute type",
+      "Expected Result": "Attribute type is changed and values are converted correctly",
+      "Requirement ID": "DEMO-SRS-122",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "CA-005",
+      "Test Case Description": "Prevent attribute type change when conversion fails",
+      "Test Steps": "1. Open a document\n2. Access custom attributes management\n3. Change attribute type to incompatible type",
+      "Expected Result": "Application prevents type change when conversion would fail",
+      "Requirement ID": "DEMO-SRS-157",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "CA-006",
+      "Test Case Description": "Set custom attribute name",
+      "Test Steps": "1. Open a document\n2. Access custom attributes management\n3. Set attribute name",
+      "Expected Result": "Attribute name is set correctly",
+      "Requirement ID": "DEMO-SRS-120",
+      "Priority": "Low"
+    },
+    {
+      "Test ID": "CA-007",
+      "Test Case Description": "Remove custom attribute",
+      "Test Steps": "1. Open a document\n2. Access custom attributes management\n3. Remove attribute",
+      "Expected Result": "Attribute is removed and values are unset in all requirements",
+      "Requirement ID": "DEMO-SRS-192, DEMO-SRS-193",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "CA-008",
+      "Test Case Description": "Edit requirement custom attributes",
+      "Test Steps": "1. Open a document\n2. Select a requirement\n3. Edit custom attributes",
+      "Expected Result": "Custom attributes are updated correctly",
+      "Requirement ID": "DEMO-SRS-165",
+      "Priority": "High"
+    }
+  ],
+  "Attachments": [
+    {
+      "Test ID": "AT-001",
+      "Test Case Description": "Attach image to requirement",
+      "Test Steps": "1. Open a document\n2. Select a requirement\n3. Attach image file",
+      "Expected Result": "Image is attached to requirement with unique ID",
+      "Requirement ID": "DEMO-SRS-124, DEMO-SRS-126",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "AT-002",
+      "Test Case Description": "Attach document to requirement",
+      "Test Steps": "1. Open a document\n2. Select a requirement\n3. Attach document file (PDF, Word, etc.)",
+      "Expected Result": "Document is attached to requirement with unique ID",
+      "Requirement ID": "DEMO-SRS-124, DEMO-SRS-126",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "AT-003",
+      "Test Case Description": "Save attachment to local file system",
+      "Test Steps": "1. Open a document\n2. Select a requirement with attachment\n3. Save attachment to file system",
+      "Expected Result": "Attachment is saved to local file system",
+      "Requirement ID": "DEMO-SRS-127",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "AT-004",
+      "Test Case Description": "Update attachment content",
+      "Test Steps": "1. Open a document\n2. Select a requirement with attachment\n3. Update attachment from file",
+      "Expected Result": "Attachment content is updated correctly",
+      "Requirement ID": "DEMO-SRS-128",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "AT-005",
+      "Test Case Description": "Remove attachment",
+      "Test Steps": "1. Open a document\n2. Select a requirement with attachment\n3. Remove attachment",
+      "Expected Result": "Attachment is permanently removed from document",
+      "Requirement ID": "DEMO-SRS-129",
+      "Priority": "Medium"
+    }
+  ],
+  "Comments": [
+    {
+      "Test ID": "CM-001",
+      "Test Case Description": "Add comment to requirement",
+      "Test Steps": "1. Open a document\n2. Select a requirement\n3. Add comment",
+      "Expected Result": "Comment is added with current date, time and author",
+      "Requirement ID": "DEMO-SRS-132, DEMO-SRS-133",
+      "Priority": "Medium"
+    }
+  ],
+  "Traceability Links": [
+    {
+      "Test ID": "TL-001",
+      "Test Case Description": "Define link type",
+      "Test Steps": "1. Open a document\n2. Access link types management\n3. Define new link type with ID",
+      "Expected Result": "New link type is created with unique ID",
+      "Requirement ID": "DEMO-SRS-135",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "TL-002",
+      "Test Case Description": "Set link type properties",
+      "Test Steps": "1. Open a document\n2. Access link types management\n3. Set name and role names",
+      "Expected Result": "Link type properties are set correctly",
+      "Requirement ID": "DEMO-SRS-156",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "TL-003",
+      "Test Case Description": "Remove link type",
+      "Test Steps": "1. Open a document\n2. Access link types management\n3. Remove link type",
+      "Expected Result": "Link type is removed and all links of that type are removed",
+      "Requirement ID": "DEMO-SRS-138, DEMO-SRS-161",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "TL-004",
+      "Test Case Description": "Create traceability link",
+      "Test Steps": "1. Open a document\n2. Select source requirements\n3. Create link to target requirements",
+      "Expected Result": "Traceability link is created correctly",
+      "Requirement ID": "DEMO-SRS-137",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "TL-005",
+      "Test Case Description": "Change link type",
+      "Test Steps": "1. Open a document\n2. Select a traceability link\n3. Change link type",
+      "Expected Result": "Link type is changed correctly",
+      "Requirement ID": "DEMO-SRS-139",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "TL-006",
+      "Test Case Description": "Revert link direction",
+      "Test Steps": "1. Open a document\n2. Select a traceability link\n3. Revert direction",
+      "Expected Result": "Link direction is reversed correctly",
+      "Requirement ID": "DEMO-SRS-140",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "TL-007",
+      "Test Case Description": "Remove traceability link",
+      "Test Steps": "1. Open a document\n2. Select a traceability link\n3. Remove link",
+      "Expected Result": "Traceability link is permanently removed",
+      "Requirement ID": "DEMO-SRS-141",
+      "Priority": "Medium"
+    }
+  ],
+  "Auto Save": [
+    {
+      "Test ID": "AS-001",
+      "Test Case Description": "Persist document changes",
+      "Test Steps": "1. Open a document\n2. Make changes\n3. Close and restart application",
+      "Expected Result": "Changes are persisted and restored after restart",
+      "Requirement ID": "DEMO-SRS-144",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "AS-002",
+      "Test Case Description": "Clear persisted data on document close",
+      "Test Steps": "1. Open a document\n2. Make changes\n3. Close document\n4. Restart application",
+      "Expected Result": "Persisted data is cleared when document is closed",
+      "Requirement ID": "DEMO-SRS-160",
+      "Priority": "Medium"
+    }
+  ],
+  "Filtering": [
+    {
+      "Test ID": "FT-001",
+      "Test Case Description": "Filter requirements by DNF condition",
+      "Test Steps": "1. Open a document\n2. Enter DNF filtering condition\n3. Apply filter",
+      "Expected Result": "Requirements matching the condition are displayed",
+      "Requirement ID": "DEMO-SRS-147",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "FT-002",
+      "Test Case Description": "Filter by section number or heading",
+      "Test Steps": "1. Open a document\n2. Enter filtering condition for section\n3. Apply filter",
+      "Expected Result": "Sections matching the condition are displayed",
+      "Requirement ID": "DEMO-SRS-148",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "FT-003",
+      "Test Case Description": "Filter by text description or attribute",
+      "Test Steps": "1. Open a document\n2. Enter filtering condition for text or attribute\n3. Apply filter",
+      "Expected Result": "Requirements matching the condition are displayed",
+      "Requirement ID": "DEMO-SRS-149",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "FT-004",
+      "Test Case Description": "Filter requirements with missing links",
+      "Test Steps": "1. Open a document\n2. Select filter for missing links of specific type\n3. Apply filter",
+      "Expected Result": "Requirements with missing links are displayed",
+      "Requirement ID": "DEMO-SRS-150",
+      "Priority": "High"
+    }
+  ],
+  "Search": [
+    {
+      "Test ID": "SR-001",
+      "Test Case Description": "Search requirements by keywords",
+      "Test Steps": "1. Open a document\n2. Enter search keywords\n3. Execute search",
+      "Expected Result": "Requirements matching keywords are highlighted",
+      "Requirement ID": "DEMO-SRS-152",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "SR-002",
+      "Test Case Description": "Navigate search results",
+      "Test Steps": "1. Open a document\n2. Execute search\n3. Navigate to next/previous match",
+      "Expected Result": "Navigation between matched requirements works correctly",
+      "Requirement ID": "DEMO-SRS-153",
+      "Priority": "Medium"
+    }
+  ],
+  "History": [
+    {
+      "Test ID": "HS-001",
+      "Test Case Description": "Record requirement changes",
+      "Test Steps": "1. Open a document\n2. Make changes to a requirement\n3. View history",
+      "Expected Result": "Changes are recorded with date, time and author",
+      "Requirement ID": "DEMO-SRS-159",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "HS-002",
+      "Test Case Description": "Display requirement change history",
+      "Test Steps": "1. Open a document\n2. Select a requirement with history\n3. View history pane",
+      "Expected Result": "All changes are displayed in chronological order",
+      "Requirement ID": "DEMO-SRS-101",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "HS-003",
+      "Test Case Description": "Expand/collapse history entries",
+      "Test Steps": "1. Open a document\n2. Select a requirement with history\n3. View history pane\n4. Expand/collapse entries",
+      "Expected Result": "History entries can be expanded and collapsed",
+      "Requirement ID": "DEMO-SRS-103",
+      "Priority": "Low"
+    }
+  ],
+  "Reporting": [
+    {
+      "Test ID": "RP-001",
+      "Test Case Description": "Print requirements table",
+      "Test Steps": "1. Open a document\n2. Filter requirements if needed\n3. Print requirements table",
+      "Expected Result": "Requirements table is printed correctly",
+      "Requirement ID": "DEMO-SRS-163",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "RP-002",
+      "Test Case Description": "Create PDF of requirements table",
+      "Test Steps": "1. Open a document\n2. Filter requirements if needed\n3. Create PDF",
+      "Expected Result": "PDF is created with requirements table",
+      "Requirement ID": "DEMO-SRS-164",
+      "Priority": "Medium"
+    }
+  ],
+  "Performance": [
+    {
+      "Test ID": "PF-001",
+      "Test Case Description": "Application startup time",
+      "Test Steps": "1. Start application\n2. Open a document\n3. Measure time until document is displayed",
+      "Expected Result": "Document is displayed within 10 seconds",
+      "Requirement ID": "DEMO-SRS-174",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "PF-002",
+      "Test Case Description": "Edit response time",
+      "Test Steps": "1. Open a document\n2. Make edits to requirements\n3. Measure response time",
+      "Expected Result": "Updates are displayed within 1 second",
+      "Requirement ID": "DEMO-SRS-171",
+      "Priority": "Medium"
+    },
+    {
+      "Test ID": "PF-003",
+      "Test Case Description": "Smooth scrolling",
+      "Test Steps": "1. Open a document with many requirements\n2. Scroll through requirements table\n3. Observe scrolling behavior",
+      "Expected Result": "No scrolling jerks longer than 200ms",
+      "Requirement ID": "DEMO-SRS-173",
+      "Priority": "Low"
+    },
+    {
+      "Test ID": "PF-004",
+      "Test Case Description": "Large document handling",
+      "Test Steps": "1. Create/open a document with 10,000 objects and 100 attachments (100MB total)\n2. Perform various operations",
+      "Expected Result": "Application handles large document correctly",
+      "Requirement ID": "DEMO-SRS-170",
+      "Priority": "High"
+    }
+  ],
+  "Security": [
+    {
+      "Test ID": "SC-001",
+      "Test Case Description": "Data encryption",
+      "Test Steps": "1. Create and save a document\n2. Examine persistent data",
+      "Expected Result": "Persistent application data is encrypted",
+      "Requirement ID": "DEMO-SRS-194",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "SC-002",
+      "Test Case Description": "No data sent to Internet",
+      "Test Steps": "1. Monitor network traffic\n2. Perform various operations in application",
+      "Expected Result": "No project data is sent to the Internet",
+      "Requirement ID": "DEMO-SRS-176",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "SC-003",
+      "Test Case Description": "Input sanitization",
+      "Test Steps": "1. Input potentially malicious data\n2. Import potentially malicious files",
+      "Expected Result": "All input is properly sanitized",
+      "Requirement ID": "DEMO-SRS-199",
+      "Priority": "High"
+    }
+  ],
+  "Browser Compatibility": [
+    {
+      "Test ID": "BC-001",
+      "Test Case Description": "Chrome compatibility",
+      "Test Steps": "1. Launch application in latest Chrome version\n2. Perform basic operations",
+      "Expected Result": "Application functions correctly in Chrome",
+      "Requirement ID": "DEMO-SRS-195",
+      "Priority": "High"
+    },
+    {
+      "Test ID": "BC-002",
+      "Test Case Description": "Firefox compatibility",
+      "Test Steps": "1. Launch application in latest Firefox version\n2. Perform basic operations",
+      "Expected Result": "Application functions correctly in Firefox",
+      "Requirement ID": "DEMO-SRS-195",
+      "Priority": "High"
+    }
+  ]
+}

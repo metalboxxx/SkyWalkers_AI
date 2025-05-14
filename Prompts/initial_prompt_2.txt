@@ -1,0 +1,57 @@
+To complete this task, follow these steps:
+
+1. Carefully read and analyze the project document. Pay attention to:
+   - Functional requirements
+   - Non-functional requirements
+   - User scenarios
+   - Edge cases
+   - Potential error conditions
+
+2. Create a test matrix that covers all aspects of the project. For each test case, include:
+   - Test case ID
+   - Test case description
+   - Test steps
+   - Expected result
+   - Actual result (leave blank for now)
+   - Pass/Fail status (leave blank for now)
+
+3. Ensure your test matrix covers:
+   - Positive scenarios (expected user behavior)
+   - Negative scenarios (error handling, invalid inputs)
+   - Boundary conditions
+   - Performance tests (if applicable)
+   - Security tests (if applicable)
+
+4. Present your test matrix in JSON format. Format your entire response as follows:
+   <test_matrix>
+   [Your test matrix in JSON format]
+<example>
+Test Matrix:
+    { File Operations:
+        [{Test ID: F0-001,
+           Test Case Description: Create a new empty document, 
+           Test Steps: 1. Launch application\n 2. Select option to create new document, 
+             Expected Result:  A new empty document is created successfully,
+             Priority: High  },
+            {Test ID: F0-002,
+           Test Case Description: Save change before closing document, 
+           Test Steps: 1. Make changes to document\n 2. Close document, 
+             Expected Result:  Application prompts user to save changes before closing,
+             Priority: High  }],
+        Import/Export:[]
+}
+</example>
+Aside the parameters from the example, you can add more parameters inside the test cases if they are helpful and informative.
+   </test_matrix>
+
+   <coverage_summary>
+   [Your summary of test coverage]
+   </coverage_summary>
+
+
+5. After creating the test matrix, provide a brief summary of the test coverage, including:
+   - Total number of test cases
+   - Breakdown of test cases by category (e.g., functional, non-functional, security)
+   - Any areas that may require additional testing or clarification
+
+Remember to be thorough and consider all possible scenarios based on the project document. Your test matrix should provide a comprehensive foundation for testing the project.
