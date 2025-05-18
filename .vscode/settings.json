@@ -1,5 +1,6 @@
 {
     "window.zoomLevel": 0.3,
     "editor.fontSize": 13,
-    "window.zoomPerWindow": true
+    "window.zoomPerWindow": true,
+    "git.ignoreLimitWarning": true
 }
