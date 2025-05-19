@@ -9,6 +9,7 @@ CORS(app)  # Enable CORS for all routes
 @app.route('/generate-test-cases', methods=['POST'])
 def generate_test_cases():
     try:
+        printf("PDF sended")
         # Check if file is in the request
         if 'file' not in request.files:
             return jsonify({'error': 'No file provided'}), 400
