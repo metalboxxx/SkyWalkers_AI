@@ -7,13 +7,15 @@ To complete this task, follow these steps:
    - Edge cases
    - Potential error conditions
 
-2. Create a test matrix that covers all aspects of the project. For each test case, include:
+2. Create a test matrix that covers all aspects of the project. For each test case, make sure to include and ONLY include:
    - Test case ID
+   - Requirement ID
    - Test case description
+   - Test Type
    - Test steps
+   - Priority
+   - Preconditions
    - Expected result
-   - Actual result (leave blank for now)
-   - Pass/Fail status (leave blank for now)
 
 3. Ensure your test matrix covers:
    - Positive scenarios (expected user behavior)
@@ -29,19 +31,25 @@ To complete this task, follow these steps:
 Test Matrix:
     { File Operations:
         [{Test ID: F0-001,
-           Test Case Description: Create a new empty document, 
-           Test Steps: 1. Launch application\n 2. Select option to create new document, 
-             Expected Result:  A new empty document is created successfully,
-             Priority: High  },
+            Requirement ID: DEMO-STS-59
+           Test Case Description: Create a new empty document,
+           Test Type: Functional,
+           Test Steps: 1. Launch application\n 2. Select option to create new document,
+           Preconditions: Application is running 
+            Expected Result:  A new empty document is created successfully,
+            Priority: High  },
             {Test ID: F0-002,
-           Test Case Description: Save change before closing document, 
-           Test Steps: 1. Make changes to document\n 2. Close document, 
+            Requirement ID: DEMO-SRS-61
+           Test Case Description: Save change before closing document,
+           Test type: Functional, 
+           Test Steps: 1. Make changes to document\n 2. Close document,
+           Preconditions: Document is opened with unsaved changes  
              Expected Result:  Application prompts user to save changes before closing,
              Priority: High  }],
         Import/Export:[]
 }
 </example>
-Aside the parameters from the example, you can add more parameters inside the test cases if they are helpful and informative.
+For each test case, include the keys from the example. No more and no less.
    </test_matrix>
 
    <coverage_summary>

@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 llm_api_key = os.getenv("ANTHROPIC_API_KEY")
-api_max_tokens = 300
+api_max_tokens = 64000          # Maximum ammount
 
 """ PATHS VARIABLES """
 path_to_initPrompt_1 = r"Prompts\initial_prompt_1.txt"
@@ -41,7 +41,7 @@ def gen_requirements_pdf_to_test_case(pdf_in_base64_encoded_string: str):
     str: pdf encode into base64 encoded string
 
     Output:
-    Json: test cases
+    dict: test cases
 
     """
 
@@ -142,23 +142,13 @@ def gen_requirements_pdf_to_test_case(pdf_in_base64_encoded_string: str):
     """
     5. Output Parsing
     """
+    
     output_testCase_JSON_string = langchainConfig_messages['messages'][-1].content
-    output_testCase_JSON = json.loads(output_testCase_JSON_string)
-
-    def remove_newlines(obj):
-        if isinstance(obj, dict):
-            return {k: remove_newlines(v) for k, v in obj.items()}
-        elif isinstance(obj, list):
-            return [remove_newlines(elem) for elem in obj]
-        elif isinstance(obj, str):
-            return obj.replace('\\n', ' ')
-        else:
-            return obj
-
-    output_testCase_JSON = remove_newlines(output_testCase_JSON)
-
-    with open(path_to_output, "w") as file:
-        json.dump(output_testCase_JSON, file, indent=4)
+    
+    try:
+        output_testCase_JSON = json.loads("{"+output_testCase_JSON_string)
+    except json.JSONDecodeError as e:
+        print(f"AI failed to generate appropriate JSON error: {e}")
 
     return output_testCase_JSON
 
@@ -167,8 +157,3 @@ def gen_requirements_pdf_to_test_case(pdf_in_base64_encoded_string: str):
 
 
 
-with open(path_to_pdf, "rb") as f:
-    pdf_data = base64.standard_b64encode(f.read()).decode("utf-8")
-
-output = gen_requirements_pdf_to_test_case(pdf_data)
-print(output)

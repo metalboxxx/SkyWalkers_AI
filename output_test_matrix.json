@@ -1,1 +1,1394 @@
-"   \"File Operations\": [     {       \"Test ID\": \"FO-001\",       \"Test Case Description\": \"Create a new empty document\",       \"Test Steps\": \"1. Launch application\\n2. Click on 'Create New Document' option\",       \"Expected Result\": \"A new empty document is created successfully\",       \"Requirement ID\": \"DEMO-SRS-53\",       \"Priority\": \"High\",       \"Test Type\": \"Positive\",       \"Preconditions\": \"Application is running\"     },     {       \"Test ID\": \"FO-002\",       \"Test Case Description\": \"Save changes before closing document\",       \"Test Steps\": \"1. Make changes to document\\n2. Attempt to close document\",       \"Expected Result\": \"Application prompts user to save changes before closing\",       \"Requirement ID\": \"DEMO-SRS-54\",       \"Priority\": \"High\",       \"Test Type\": \"Positive\",       \"Preconditions\": \"Document is open and has unsaved changes\"     },     {       \"Test ID\": \"FO-003\",       \"Test Case Description\": \"Open document from file\",       \"Test Steps\": \"1. Click 'Open File' option\\n2. Select an existing document file\",       \"Expected Result\": \"Selected document opens correctly with all content preserved\",       \"Requirement ID\": \"DEMO-SRS-56\",       \"Priority\": \"High\",       \"Test Type\": \"Positive\",       \"Preconditions\": \"Valid document file exists in the file system\"     },     {       \"Test ID\": \"FO-004\",       \"Test Case Description\": \"Save document to file\",       \"Test Steps\": \"1. Open a document\\n2. Click 'Save' option\\n3. Specify file name and location\",       \"Expected Result\": \"Document is saved to specified location with correct content\",       \"Requirement ID\": \"DEMO-SRS-59\",       \"Priority\": \"High\",       \"Test Type\": \"Positive\",       \"Preconditions\": \"Document is open\"     },     {       \"Test ID\": \"FO-005\",       \"Test Case Description\": \"Create document template from current document\",       \"Test Steps\": \"1. Open a document with structure and attributes\\n2. Select 'Create Template' option\\n3. Specify template name and location\",       \"Expected Result\": \"Template file is created preserving structure and attribute definitions\",       \"Requirement ID\": \"DEMO-SRS-61, DEMO-SRS-62\",       \"Priority\": \"Medium\",       \"Test Type\": \"Positive\",       \"Preconditions\": \"Document with defined structure and attributes is open\"     },     {       \"Test ID\": \"FO-006\",       \"Test Case Description\": \"Create new document from template\",       \"Test Steps\": \"1. Select 'New from Template' option\\n2. Choose existing template file\",       \"Expected Result\": \"New document is created with structure and attributes from template\",       \"Requirement ID\": \"DEMO-SRS-63\",       \"Priority\": \"Medium\","
+{
+    "File Operations": [
+        {
+            "Test ID": "FO-001",
+            "Requirement ID": "DEMO-SRS-53",
+            "Test Case Description": "Create a new empty document",
+            "Test Type": "Functional",
+            "Test Steps": "1. Launch application\n2. Select option to create new document\n3. Verify document is created",
+            "Preconditions": "Application is running",
+            "Expected Result": "A new empty document is created successfully with default structure",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "FO-002",
+            "Requirement ID": "DEMO-SRS-54",
+            "Test Case Description": "Save changes before closing document with unsaved changes",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open a document\n2. Make changes to document\n3. Attempt to close document\n4. Verify prompt appears\n5. Select 'Save' option",
+            "Preconditions": "Document is opened with unsaved changes",
+            "Expected Result": "Application prompts user to save changes before closing and saves when requested",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "FO-003",
+            "Requirement ID": "DEMO-SRS-54",
+            "Test Case Description": "Discard changes when closing document with unsaved changes",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open a document\n2. Make changes to document\n3. Attempt to close document\n4. Verify prompt appears\n5. Select 'Don't Save' option",
+            "Preconditions": "Document is opened with unsaved changes",
+            "Expected Result": "Application prompts user to save changes before closing and discards changes when requested",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FO-004",
+            "Requirement ID": "DEMO-SRS-54",
+            "Test Case Description": "Cancel closing document with unsaved changes",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open a document\n2. Make changes to document\n3. Attempt to close document\n4. Verify prompt appears\n5. Select 'Cancel' option",
+            "Preconditions": "Document is opened with unsaved changes",
+            "Expected Result": "Application prompts user to save changes before closing and cancels close operation when requested",
+            "Priority": "Low"
+        },
+        {
+            "Test ID": "FO-005",
+            "Requirement ID": "DEMO-SRS-56",
+            "Test Case Description": "Open document from file",
+            "Test Type": "Functional",
+            "Test Steps": "1. Launch application\n2. Select option to open document\n3. Choose a valid file\n4. Verify document content",
+            "Preconditions": "Application is running and valid document file exists",
+            "Expected Result": "Document is opened successfully from chosen file with all content intact",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "FO-006",
+            "Requirement ID": "DEMO-SRS-56",
+            "Test Case Description": "Attempt to open non-existent file",
+            "Test Type": "Negative",
+            "Test Steps": "1. Launch application\n2. Select option to open document\n3. Enter path to non-existent file\n4. Confirm operation",
+            "Preconditions": "Application is running",
+            "Expected Result": "Application displays appropriate error message indicating file not found",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FO-007",
+            "Requirement ID": "DEMO-SRS-56",
+            "Test Case Description": "Attempt to open invalid file format",
+            "Test Type": "Negative",
+            "Test Steps": "1. Launch application\n2. Select option to open document\n3. Choose file with invalid format\n4. Confirm operation",
+            "Preconditions": "Application is running and invalid format file exists",
+            "Expected Result": "Application displays appropriate error message indicating invalid file format",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FO-008",
+            "Requirement ID": "DEMO-SRS-59",
+            "Test Case Description": "Save document to file",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open a document\n2. Make changes\n3. Select option to save document\n4. Choose file location and name\n5. Verify file creation",
+            "Preconditions": "Document is opened with changes",
+            "Expected Result": "Document is saved to specified file location with all changes preserved",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "FO-009",
+            "Requirement ID": "DEMO-SRS-59",
+            "Test Case Description": "Save document to read-only location",
+            "Test Type": "Negative",
+            "Test Steps": "1. Open a document\n2. Select option to save document\n3. Choose read-only location\n4. Confirm operation",
+            "Preconditions": "Document is opened and read-only location exists",
+            "Expected Result": "Application displays appropriate error message indicating permission denied",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FO-010",
+            "Requirement ID": "DEMO-SRS-59",
+            "Test Case Description": "Save document when disk is full",
+            "Test Type": "Negative",
+            "Test Steps": "1. Open a document\n2. Select option to save document\n3. Choose location on full disk\n4. Confirm operation",
+            "Preconditions": "Document is opened and disk space is exhausted",
+            "Expected Result": "Application displays appropriate error message indicating disk full",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FO-011",
+            "Requirement ID": "DEMO-SRS-61",
+            "Test Case Description": "Create document template from opened document",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open a document with defined structure and attributes\n2. Select option to create template\n3. Choose file location and name\n4. Verify template creation\n5. Open new template to verify content",
+            "Preconditions": "Document with defined structure and attributes is opened",
+            "Expected Result": "Template file is created from opened document with structure and attributes preserved",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FO-012",
+            "Requirement ID": "DEMO-SRS-62",
+            "Test Case Description": "Verify template stores structure and attributes",
+            "Test Type": "Functional",
+            "Test Steps": "1. Create template from document with complex structure and various attribute types\n2. Open template file in text editor\n3. Verify structure elements are present\n4. Verify attribute definitions are present\n5. Create new document from template\n6. Verify structure and attributes match original",
+            "Preconditions": "Document with complex structure and various attribute types exists",
+            "Expected Result": "Template contains correct structure of document sections and all requirement attribute definitions",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FO-013",
+            "Requirement ID": "DEMO-SRS-63",
+            "Test Case Description": "Create new document from template",
+            "Test Type": "Functional",
+            "Test Steps": "1. Select option to create document from template\n2. Choose template file\n3. Verify new document structure\n4. Verify attribute definitions\n5. Add new requirements\n6. Verify attributes can be set",
+            "Preconditions": "Valid template file exists",
+            "Expected Result": "New document is created with structure and attributes from template, allowing new content to be added",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FO-014",
+            "Requirement ID": "DEMO-SRS-63",
+            "Test Case Description": "Create document from corrupted template",
+            "Test Type": "Negative",
+            "Test Steps": "1. Create a corrupted template file\n2. Select option to create document from template\n3. Choose corrupted template file\n4. Confirm operation",
+            "Preconditions": "Corrupted template file exists",
+            "Expected Result": "Application displays appropriate error message indicating template is invalid or corrupted",
+            "Priority": "Low"
+        },
+        {
+            "Test ID": "FO-015",
+            "Requirement ID": "DEMO-SRS-112",
+            "Test Case Description": "Permanently remove deleted requirements",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document with deleted requirements\n2. Select deleted requirements\n3. Choose option to permanently remove\n4. Confirm operation\n5. Verify requirements are removed",
+            "Preconditions": "Document with deleted requirements is opened",
+            "Expected Result": "Selected deleted requirements are permanently removed from document",
+            "Priority": "Medium"
+        }
+    ],
+    "Import/Export": [
+        {
+            "Test ID": "IE-001",
+            "Requirement ID": "DEMO-SRS-72",
+            "Test Case Description": "Import MS Word document with rich content",
+            "Test Type": "Functional",
+            "Test Steps": "1. Select import option\n2. Choose MS Word document with sections, rich text, and images\n3. Confirm import\n4. Verify imported content structure\n5. Verify rich text formatting\n6. Verify images",
+            "Preconditions": "Valid MS Word document with rich content exists",
+            "Expected Result": "Document is imported preserving structure, rich text formatting, and images",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "IE-002",
+            "Requirement ID": "DEMO-SRS-72",
+            "Test Case Description": "Import MS Word document with extremely large content",
+            "Test Type": "Edge Case",
+            "Test Steps": "1. Select import option\n2. Choose MS Word document with content approaching size limits\n3. Confirm import\n4. Verify imported content",
+            "Preconditions": "MS Word document with very large content exists",
+            "Expected Result": "Document is imported successfully without data loss or performance issues",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "IE-003",
+            "Requirement ID": "DEMO-SRS-72",
+            "Test Case Description": "Import corrupted MS Word document",
+            "Test Type": "Negative",
+            "Test Steps": "1. Select import option\n2. Choose corrupted MS Word document\n3. Confirm import",
+            "Preconditions": "Corrupted MS Word document exists",
+            "Expected Result": "Application displays appropriate error message and handles failure gracefully",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "IE-004",
+            "Requirement ID": "DEMO-SRS-73",
+            "Test Case Description": "Import MS Excel table of requirements",
+            "Test Type": "Functional",
+            "Test Steps": "1. Select import option\n2. Choose MS Excel file with requirements\n3. Confirm import\n4. Verify section headings\n5. Verify requirement levels\n6. Verify text descriptions\n7. Verify custom attribute values",
+            "Preconditions": "Valid MS Excel file with requirements exists",
+            "Expected Result": "Requirements are imported preserving headings, levels, text, and attribute values",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "IE-005",
+            "Requirement ID": "DEMO-SRS-73",
+            "Test Case Description": "Import MS Excel with invalid structure",
+            "Test Type": "Negative",
+            "Test Steps": "1. Select import option\n2. Choose MS Excel file with invalid structure\n3. Confirm import",
+            "Preconditions": "MS Excel file with invalid structure exists",
+            "Expected Result": "Application displays appropriate error message indicating structure issues",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "IE-006",
+            "Requirement ID": "DEMO-SRS-76",
+            "Test Case Description": "Export document view to HTML",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document with various content types\n2. Apply filters if needed\n3. Select export to HTML option\n4. Choose file location\n5. Verify exported HTML file\n6. Open in browser to check formatting",
+            "Preconditions": "Document with various content types is opened",
+            "Expected Result": "Document view is exported to HTML format preserving structure and formatting",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "IE-007",
+            "Requirement ID": "DEMO-SRS-76",
+            "Test Case Description": "Export filtered document view to HTML",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Apply specific filters\n3. Select export to HTML option\n4. Choose file location\n5. Verify exported HTML contains only filtered content",
+            "Preconditions": "Document is opened with filters applied",
+            "Expected Result": "Only filtered content is exported to HTML format",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "IE-008",
+            "Requirement ID": "DEMO-SRS-77",
+            "Test Case Description": "Export requirements to CSV",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document with requirements\n2. Select export to CSV option\n3. Choose file location\n4. Verify exported CSV file\n5. Open in spreadsheet application to check content",
+            "Preconditions": "Document with requirements is opened",
+            "Expected Result": "Requirements are exported to CSV format with correct data",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "IE-009",
+            "Requirement ID": "DEMO-SRS-77",
+            "Test Case Description": "Export to CSV with insufficient permissions",
+            "Test Type": "Negative",
+            "Test Steps": "1. Open document\n2. Select export to CSV option\n3. Choose location with insufficient write permissions\n4. Confirm export",
+            "Preconditions": "Document is opened and location with insufficient permissions exists",
+            "Expected Result": "Application displays appropriate error message indicating permission issues",
+            "Priority": "Low"
+        }
+    ],
+    "Document View": [
+        {
+            "Test ID": "DV-001",
+            "Requirement ID": "DEMO-SRS-80",
+            "Test Case Description": "Display table of contents with hierarchical structure",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document with multiple nested sections\n2. Verify table of contents display\n3. Verify hierarchy is correctly represented\n4. Verify all sections are included",
+            "Preconditions": "Document with multiple nested sections is opened",
+            "Expected Result": "Table of contents displays section headings in correct hierarchical structure",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "DV-002",
+            "Requirement ID": "DEMO-SRS-81",
+            "Test Case Description": "Navigate to section from table of contents",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document with multiple sections\n2. Click on section in table of contents\n3. Verify focus changes to selected section in requirements table",
+            "Preconditions": "Document with multiple sections is opened",
+            "Expected Result": "Selected section is focused in requirements table",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "DV-003",
+            "Requirement ID": "DEMO-SRS-83",
+            "Test Case Description": "Display requirements table with all columns",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document with requirements and custom attributes\n2. Verify requirements table display\n3. Verify all required columns are present (ID, Description, Discussion, Links, custom attributes)",
+            "Preconditions": "Document with requirements and custom attributes is opened",
+            "Expected Result": "Requirements table displays with all required columns correctly formatted",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "DV-004",
+            "Requirement ID": "DEMO-SRS-84",
+            "Test Case Description": "Verify ID column content in requirements table",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document with requirements\n2. Examine ID column in requirements table\n3. Verify each requirement has unique identifier displayed",
+            "Preconditions": "Document with multiple requirements is opened",
+            "Expected Result": "ID column displays unique requirement identifiers for each requirement",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "DV-005",
+            "Requirement ID": "DEMO-SRS-85",
+            "Test Case Description": "Verify Description column content in requirements table",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document with requirements\n2. Examine Description column in requirements table\n3. Verify section numbers, headings, requirement text, and attachments are displayed correctly",
+            "Preconditions": "Document with requirements having rich descriptions and attachments is opened",
+            "Expected Result": "Description column displays section numbers, headings, requirement text descriptions and attachments correctly",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "DV-006",
+            "Requirement ID": "DEMO-SRS-86",
+            "Test Case Description": "Verify Discussion column content in requirements table",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document with requirements having comments\n2. Examine Discussion column in requirements table\n3. Verify comments display author, date, and text\n4. Verify comments are ordered by date and time",
+            "Preconditions": "Document with requirements having multiple comments is opened",
+            "Expected Result": "Discussion column displays requirement comments with author, date, and text information ordered chronologically",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "DV-007",
+            "Requirement ID": "DEMO-SRS-87",
+            "Test Case Description": "Verify Links column content in requirements table",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document with requirements having traceability links\n2. Examine Links column in requirements table\n3. Verify links are displayed and grouped by link types",
+            "Preconditions": "Document with requirements having various traceability links is opened",
+            "Expected Result": "Links column displays requirement traceability links grouped by link types",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "DV-008",
+            "Requirement ID": "DEMO-SRS-88",
+            "Test Case Description": "Change width of requirements table columns",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Drag column divider to resize column\n3. Verify column width changes\n4. Verify content adapts to new width\n5. Repeat for each column",
+            "Preconditions": "Document is opened in requirements table view",
+            "Expected Result": "Column width changes according to user action and content adapts appropriately",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "DV-009",
+            "Requirement ID": "DEMO-SRS-190",
+            "Test Case Description": "Reorder requirements table columns",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Drag column header to new position\n3. Verify column order changes\n4. Verify functionality is preserved after reordering",
+            "Preconditions": "Document is opened in requirements table view",
+            "Expected Result": "Columns are reordered according to user action and functionality is preserved",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "DV-010",
+            "Requirement ID": "DEMO-SRS-89",
+            "Test Case Description": "Show/hide requirements table columns",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access column visibility controls\n3. Hide a visible column\n4. Verify column disappears\n5. Show a hidden column\n6. Verify column appears\n7. Attempt to hide ID column",
+            "Preconditions": "Document is opened in requirements table view",
+            "Expected Result": "Selected columns are shown/hidden as requested, except ID column which cannot be hidden",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "DV-011",
+            "Requirement ID": "DEMO-SRS-90",
+            "Test Case Description": "Sort requirements table columns",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Click column header to sort ascending\n3. Verify sorting order\n4. Click again to sort descending\n5. Verify sorting order\n6. Attempt to sort Discussion and Links columns",
+            "Preconditions": "Document is opened in requirements table view",
+            "Expected Result": "Columns are sorted in ascending/descending order as requested, except Discussion and Links columns which cannot be sorted",
+            "Priority": "Medium"
+        }
+    ],
+    "Detailed Information": [
+        {
+            "Test ID": "DI-001",
+            "Requirement ID": "DEMO-SRS-92",
+            "Test Case Description": "Show/hide detailed information pane",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select a requirement\n3. Toggle detailed information pane\n4. Verify pane visibility changes\n5. Verify content in pane",
+            "Preconditions": "Document is opened with requirements",
+            "Expected Result": "Detailed information pane is shown/hidden as toggled with appropriate content",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "DI-002",
+            "Requirement ID": "DEMO-SRS-93",
+            "Test Case Description": "Display custom attributes in detail pane",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select a requirement with various custom attributes\n3. Show custom attributes pane\n4. Verify all assigned attributes are displayed\n5. Verify attribute values are correct",
+            "Preconditions": "Document with requirements having various custom attributes is opened",
+            "Expected Result": "Custom attributes pane displays all assigned attributes for selected requirement with correct values",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "DI-003",
+            "Requirement ID": "DEMO-SRS-94",
+            "Test Case Description": "Display discussion comments in detail pane",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select a requirement with multiple comments\n3. Show discussion pane\n4. Verify all comments are displayed\n5. Verify chronological ordering",
+            "Preconditions": "Document with requirements having multiple comments is opened",
+            "Expected Result": "Discussion pane displays all comments ordered by date and time",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "DI-004",
+            "Requirement ID": "DEMO-SRS-96",
+            "Test Case Description": "Expand/collapse comments in discussion pane",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select a requirement with multiple comments\n3. Show discussion pane\n4. Expand a collapsed comment\n5. Verify expanded state\n6. Collapse an expanded comment\n7. Verify collapsed state\n8. Use expand/collapse all function",
+            "Preconditions": "Document with requirements having multiple comments is opened",
+            "Expected Result": "Comments expand/collapse individually and collectively as requested",
+            "Priority": "Low"
+        },
+        {
+            "Test ID": "DI-005",
+            "Requirement ID": "DEMO-SRS-97",
+            "Test Case Description": "Verify expanded comment display",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select a requirement with comments\n3. Show discussion pane\n4. Expand a comment\n5. Verify date, time, author and full description are displayed",
+            "Preconditions": "Document with requirements having comments is opened",
+            "Expected Result": "Expanded comment displays date, time, author and full description",
+            "Priority": "Low"
+        },
+        {
+            "Test ID": "DI-006",
+            "Requirement ID": "DEMO-SRS-98",
+            "Test Case Description": "Verify collapsed comment display",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select a requirement with comments\n3. Show discussion pane\n4. Collapse a comment\n5. Verify date, time and author are displayed but description is hidden",
+            "Preconditions": "Document with requirements having comments is opened",
+            "Expected Result": "Collapsed comment displays date, time and author but hides description",
+            "Priority": "Low"
+        },
+        {
+            "Test ID": "DI-007",
+            "Requirement ID": "DEMO-SRS-99",
+            "Test Case Description": "Display traceability links in detail pane",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select a requirement with various traceability links\n3. Show links pane\n4. Verify all links are displayed\n5. Verify grouping by link types\n6. Verify ordering by ID",
+            "Preconditions": "Document with requirements having various traceability links is opened",
+            "Expected Result": "Links pane displays all traceability links grouped by link types and ordered by ID",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "DI-008",
+            "Requirement ID": "DEMO-SRS-142",
+            "Test Case Description": "Navigate to linked requirement",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select a requirement with links\n3. Show links pane\n4. Click on a link\n5. Verify focus changes to linked requirement",
+            "Preconditions": "Document with requirements having traceability links is opened",
+            "Expected Result": "Application focuses on the linked requirement when link is clicked",
+            "Priority": "Medium"
+        }
+    ],
+    "Edit Document": [
+        {
+            "Test ID": "ED-001",
+            "Requirement ID": "DEMO-SRS-106",
+            "Test Case Description": "Create new requirement in document section",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select section\n3. Create new requirement\n4. Verify requirement is created\n5. Verify it appears in correct section",
+            "Preconditions": "Document is opened",
+            "Expected Result": "New requirement is created in selected section",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "ED-002",
+            "Requirement ID": "DEMO-SRS-107",
+            "Test Case Description": "Verify unique ID assignment for new requirement",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Create multiple new requirements\n3. Verify each has unique ID\n4. Attempt to modify ID\n5. Verify ID cannot be changed",
+            "Preconditions": "Document is opened",
+            "Expected Result": "Each new requirement is assigned a unique ID that cannot be changed",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "ED-003",
+            "Requirement ID": "DEMO-SRS-108",
+            "Test Case Description": "Copy requirements within document",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select multiple requirements\n3. Copy to another section\n4. Verify copies are created\n5. Verify original requirements remain unchanged\n6. Verify copies have new IDs",
+            "Preconditions": "Document with multiple requirements is opened",
+            "Expected Result": "Selected requirements are copied to target location with new IDs while originals remain unchanged",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "ED-004",
+            "Requirement ID": "DEMO-SRS-109",
+            "Test Case Description": "Move requirements within document",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select multiple requirements\n3. Move to another section\n4. Verify requirements are moved\n5. Verify IDs remain unchanged\n6. Verify source location no longer contains requirements",
+            "Preconditions": "Document with multiple requirements is opened",
+            "Expected Result": "Selected requirements are moved to target location with unchanged IDs and removed from source location",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "ED-005",
+            "Requirement ID": "DEMO-SRS-110",
+            "Test Case Description": "Mark requirements as deleted",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select multiple requirements\n3. Mark as deleted\n4. Verify requirements are marked as deleted\n5. Verify visual indication of deleted state",
+            "Preconditions": "Document with multiple requirements is opened",
+            "Expected Result": "Selected requirements are marked as deleted with visual indication",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "ED-006",
+            "Requirement ID": "DEMO-SRS-111",
+            "Test Case Description": "Undelete requirements",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select multiple deleted requirements\n3. Undelete\n4. Verify requirements are restored\n5. Verify deleted status is removed",
+            "Preconditions": "Document with deleted requirements is opened",
+            "Expected Result": "Selected requirements are restored from deleted state",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "ED-007",
+            "Requirement ID": "DEMO-SRS-112",
+            "Test Case Description": "Permanently remove deleted requirements",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select multiple deleted requirements\n3. Choose permanent removal option\n4. Confirm operation\n5. Verify requirements are completely removed",
+            "Preconditions": "Document with deleted requirements is opened",
+            "Expected Result": "Selected deleted requirements are permanently removed from document",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "ED-008",
+            "Requirement ID": "DEMO-SRS-114",
+            "Test Case Description": "Edit section heading",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select a section\n3. Edit heading\n4. Save changes\n5. Verify heading is updated\n6. Verify table of contents is updated",
+            "Preconditions": "Document with sections is opened",
+            "Expected Result": "Section heading is updated and reflected in table of contents",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "ED-009",
+            "Requirement ID": "DEMO-SRS-115",
+            "Test Case Description": "Edit requirement text description",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select a requirement\n3. Edit text description\n4. Add formatting\n5. Save changes\n6. Verify description is updated with formatting",
+            "Preconditions": "Document with requirements is opened",
+            "Expected Result": "Requirement text description is updated with formatting preserved",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "ED-010",
+            "Requirement ID": "DEMO-SRS-116",
+            "Test Case Description": "Paste HTML content into requirement description",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select a requirement\n3. Copy HTML content from external source\n4. Paste into description\n5. Save changes\n6. Verify content and formatting are preserved",
+            "Preconditions": "Document is opened and HTML content is available for copying",
+            "Expected Result": "HTML content is pasted into requirement description with formatting preserved",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "ED-011",
+            "Requirement ID": "DEMO-SRS-116",
+            "Test Case Description": "Paste malformed HTML content into requirement description",
+            "Test Type": "Negative",
+            "Test Steps": "1. Open document\n2. Select a requirement\n3. Copy malformed HTML content\n4. Paste into description\n5. Save changes",
+            "Preconditions": "Document is opened and malformed HTML content is available",
+            "Expected Result": "Application sanitizes or rejects malformed HTML content without crashing",
+            "Priority": "Medium"
+        }
+    ],
+    "Custom Attributes": [
+        {
+            "Test ID": "CA-001",
+            "Requirement ID": "DEMO-SRS-119",
+            "Test Case Description": "Define custom requirement attributes",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access custom attributes settings\n3. Define new attribute with ID\n4. Save changes\n5. Verify attribute is created",
+            "Preconditions": "Document is opened",
+            "Expected Result": "New custom attribute is created with specified unique ID",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "CA-002",
+            "Requirement ID": "DEMO-SRS-119",
+            "Test Case Description": "Attempt to create attribute with duplicate ID",
+            "Test Type": "Negative",
+            "Test Steps": "1. Open document\n2. Access custom attributes settings\n3. Define attribute with existing ID\n4. Attempt to save",
+            "Preconditions": "Document with existing custom attribute is opened",
+            "Expected Result": "Application prevents creation of attribute with duplicate ID and displays error message",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "CA-003",
+            "Requirement ID": "DEMO-SRS-120",
+            "Test Case Description": "Set optional name for custom attribute",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access custom attributes settings\n3. Select existing attribute\n4. Set optional name\n5. Save changes\n6. Verify name is set",
+            "Preconditions": "Document with custom attribute is opened",
+            "Expected Result": "Optional name is set for custom attribute and displayed in UI",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "CA-004",
+            "Requirement ID": "DEMO-SRS-121",
+            "Test Case Description": "Set custom attribute type - boolean",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access custom attributes settings\n3. Select attribute\n4. Set type to boolean\n5. Save changes\n6. Verify type is set\n7. Verify boolean input is available when editing requirements",
+            "Preconditions": "Document with custom attribute is opened",
+            "Expected Result": "Attribute type is set to boolean and appropriate input control is available",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "CA-005",
+            "Requirement ID": "DEMO-SRS-121",
+            "Test Case Description": "Set custom attribute type - integer",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access custom attributes settings\n3. Select attribute\n4. Set type to integer\n5. Save changes\n6. Verify type is set\n7. Verify integer input is available when editing requirements",
+            "Preconditions": "Document with custom attribute is opened",
+            "Expected Result": "Attribute type is set to integer and appropriate input control is available",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "CA-006",
+            "Requirement ID": "DEMO-SRS-121",
+            "Test Case Description": "Set custom attribute type - enum",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access custom attributes settings\n3. Select attribute\n4. Set type to enum\n5. Define enum values\n6. Save changes\n7. Verify type is set\n8. Verify enum selection is available when editing requirements",
+            "Preconditions": "Document with custom attribute is opened",
+            "Expected Result": "Attribute type is set to enum with defined values and appropriate selection control is available",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "CA-007",
+            "Requirement ID": "DEMO-SRS-191",
+            "Test Case Description": "Set multiple values for enumeration attribute",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement\n3. Edit enum attribute\n4. Select multiple values\n5. Save changes\n6. Verify multiple values are set",
+            "Preconditions": "Document with enum attribute allowing multiple values is opened",
+            "Expected Result": "Multiple values are set and displayed for the enumeration attribute",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "CA-008",
+            "Requirement ID": "DEMO-SRS-122",
+            "Test Case Description": "Convert attribute values when changing type - string to integer",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document with attribute of string type containing numeric values\n2. Access custom attributes settings\n3. Change attribute type to integer\n4. Save changes\n5. Verify conversion\n6. Verify values in requirements",
+            "Preconditions": "Document with string attribute containing numeric values is opened",
+            "Expected Result": "Attribute values are automatically converted to integer type",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "CA-009",
+            "Requirement ID": "DEMO-SRS-157",
+            "Test Case Description": "Prevent attribute type change when conversion fails",
+            "Test Type": "Negative",
+            "Test Steps": "1. Open document with attribute of string type containing non-numeric values\n2. Access custom attributes settings\n3. Change attribute type to integer\n4. Attempt to save changes",
+            "Preconditions": "Document with string attribute containing non-numeric values is opened",
+            "Expected Result": "Application prevents the change of attribute type and displays error message",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "CA-010",
+            "Requirement ID": "DEMO-SRS-192",
+            "Test Case Description": "Remove custom attribute",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access custom attributes settings\n3. Select attribute\n4. Remove attribute\n5. Confirm operation\n6. Verify attribute is removed",
+            "Preconditions": "Document with custom attribute is opened",
+            "Expected Result": "Custom attribute is removed from attribute definitions",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "CA-011",
+            "Requirement ID": "DEMO-SRS-193",
+            "Test Case Description": "Verify attribute values are unset when attribute is removed",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document with requirements using custom attribute\n2. Access custom attributes settings\n3. Remove attribute\n4. Confirm operation\n5. Verify attribute values are unset in all requirements",
+            "Preconditions": "Document with requirements using custom attribute is opened",
+            "Expected Result": "Attribute values are unset in all requirements when attribute is removed",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "CA-012",
+            "Requirement ID": "DEMO-SRS-165",
+            "Test Case Description": "Edit custom attributes of requirement",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement\n3. Edit custom attributes\n4. Set values for different attribute types\n5. Save changes\n6. Verify values are set",
+            "Preconditions": "Document with requirements and custom attributes of various types is opened",
+            "Expected Result": "Custom attribute values are set for the requirement and displayed correctly",
+            "Priority": "High"
+        }
+    ],
+    "Attachments": [
+        {
+            "Test ID": "AT-001",
+            "Requirement ID": "DEMO-SRS-124",
+            "Test Case Description": "Attach image to requirement",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement\n3. Add image attachment\n4. Select image file\n5. Verify attachment is added\n6. Verify image is displayed",
+            "Preconditions": "Document is opened and image file exists",
+            "Expected Result": "Image is attached to requirement and displayed correctly",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "AT-002",
+            "Requirement ID": "DEMO-SRS-124",
+            "Test Case Description": "Attach document to requirement",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement\n3. Add document attachment\n4. Select document file (PDF, Word, etc.)\n5. Verify attachment is added\n6. Verify icon or representation is displayed",
+            "Preconditions": "Document is opened and file for attachment exists",
+            "Expected Result": "Document is attached to requirement with appropriate representation",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "AT-003",
+            "Requirement ID": "DEMO-SRS-124",
+            "Test Case Description": "Attach file with extremely large size",
+            "Test Type": "Edge Case",
+            "Test Steps": "1. Open document\n2. Select requirement\n3. Add attachment\n4. Select very large file\n5. Observe behavior",
+            "Preconditions": "Document is opened and very large file exists",
+            "Expected Result": "Application either handles large file appropriately or provides clear error message about size limitations",
+            "Priority": "Low"
+        },
+        {
+            "Test ID": "AT-004",
+            "Requirement ID": "DEMO-SRS-126",
+            "Test Case Description": "Verify unique attachment ID generation",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement\n3. Add multiple attachments with different names\n4. Add attachment with same name to different requirement\n5. Verify ID format for each attachment",
+            "Preconditions": "Document is opened and files for attachment exist",
+            "Expected Result": "Each attachment receives unique ID combining requirement ID and original filename",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "AT-005",
+            "Requirement ID": "DEMO-SRS-127",
+            "Test Case Description": "Save attachment to local file system",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement with attachment\n3. Select attachment\n4. Save to file system\n5. Choose location\n6. Verify file is saved\n7. Verify content integrity",
+            "Preconditions": "Document with attachment is opened",
+            "Expected Result": "Attachment is saved to specified location with content intact",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "AT-006",
+            "Requirement ID": "DEMO-SRS-128",
+            "Test Case Description": "Update content of requirement attachment",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement with attachment\n3. Select update attachment option\n4. Choose new file\n5. Confirm update\n6. Verify attachment is updated",
+            "Preconditions": "Document with attachment is opened and new file exists",
+            "Expected Result": "Attachment content is updated from selected file while maintaining the same attachment ID",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "AT-007",
+            "Requirement ID": "DEMO-SRS-129",
+            "Test Case Description": "Remove attachment from document",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement with attachment\n3. Select attachment\n4. Remove attachment\n5. Confirm operation\n6. Verify attachment is removed",
+            "Preconditions": "Document with attachment is opened",
+            "Expected Result": "Attachment is permanently removed from document",
+            "Priority": "Medium"
+        }
+    ],
+    "Comments and Discussion": [
+        {
+            "Test ID": "CD-001",
+            "Requirement ID": "DEMO-SRS-132",
+            "Test Case Description": "Add comment to requirement",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement\n3. Add comment\n4. Enter comment text\n5. Save comment\n6. Verify comment is added",
+            "Preconditions": "Document is opened",
+            "Expected Result": "Comment is added to selected requirement and displayed in discussion",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "CD-002",
+            "Requirement ID": "DEMO-SRS-132",
+            "Test Case Description": "Add comment with rich text formatting",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement\n3. Add comment\n4. Enter text with formatting\n5. Save comment\n6. Verify formatting is preserved",
+            "Preconditions": "Document is opened",
+            "Expected Result": "Comment with rich text formatting is added and displayed correctly",
+            "Priority": "Low"
+        },
+        {
+            "Test ID": "CD-003",
+            "Requirement ID": "DEMO-SRS-133",
+            "Test Case Description": "Verify comment metadata recording",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement\n3. Add comment\n4. Save comment\n5. Verify date, time, and author are recorded\n6. Verify metadata is displayed",
+            "Preconditions": "Document is opened",
+            "Expected Result": "Comment includes current date, time, and author information",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "CD-004",
+            "Requirement ID": "DEMO-SRS-96",
+            "Test Case Description": "Expand individual comment in discussion pane",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement with multiple comments\n3. Show discussion pane\n4. Expand a collapsed comment\n5. Verify expanded state shows full content",
+            "Preconditions": "Document with requirements having multiple comments is opened",
+            "Expected Result": "Selected comment expands to show full content",
+            "Priority": "Low"
+        },
+        {
+            "Test ID": "CD-005",
+            "Requirement ID": "DEMO-SRS-96",
+            "Test Case Description": "Collapse individual comment in discussion pane",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement with multiple comments\n3. Show discussion pane\n4. Collapse an expanded comment\n5. Verify collapsed state hides content",
+            "Preconditions": "Document with requirements having multiple comments is opened",
+            "Expected Result": "Selected comment collapses to hide content",
+            "Priority": "Low"
+        },
+        {
+            "Test ID": "CD-006",
+            "Requirement ID": "DEMO-SRS-96",
+            "Test Case Description": "Expand all comments in discussion pane",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement with multiple comments\n3. Show discussion pane\n4. Use expand all function\n5. Verify all comments are expanded",
+            "Preconditions": "Document with requirements having multiple comments is opened",
+            "Expected Result": "All comments are expanded to show full content",
+            "Priority": "Low"
+        },
+        {
+            "Test ID": "CD-007",
+            "Requirement ID": "DEMO-SRS-96",
+            "Test Case Description": "Collapse all comments in discussion pane",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement with multiple comments\n3. Show discussion pane\n4. Use collapse all function\n5. Verify all comments are collapsed",
+            "Preconditions": "Document with requirements having multiple comments is opened",
+            "Expected Result": "All comments are collapsed to hide content",
+            "Priority": "Low"
+        }
+    ],
+    "Traceability": [
+        {
+            "Test ID": "TR-001",
+            "Requirement ID": "DEMO-SRS-135",
+            "Test Case Description": "Define link type with unique ID",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access link type settings\n3. Define new link type with ID\n4. Save changes\n5. Verify link type is created",
+            "Preconditions": "Document is opened",
+            "Expected Result": "New link type is created with specified unique ID",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "TR-002",
+            "Requirement ID": "DEMO-SRS-135",
+            "Test Case Description": "Attempt to create link type with duplicate ID",
+            "Test Type": "Negative",
+            "Test Steps": "1. Open document\n2. Access link type settings\n3. Define link type with existing ID\n4. Attempt to save",
+            "Preconditions": "Document with existing link type is opened",
+            "Expected Result": "Application prevents creation of link type with duplicate ID and displays error message",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "TR-003",
+            "Requirement ID": "DEMO-SRS-156",
+            "Test Case Description": "Set link type properties",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access link type settings\n3. Select existing link type\n4. Set name\n5. Set source role name\n6. Set target role name\n7. Save changes\n8. Verify properties are set",
+            "Preconditions": "Document with link type is opened",
+            "Expected Result": "Link type name and role names for source and target are set correctly and displayed in UI",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "TR-004",
+            "Requirement ID": "DEMO-SRS-137",
+            "Test Case Description": "Create traceability link between individual requirements",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select source requirement\n3. Create link to target requirement\n4. Select link type\n5. Confirm operation\n6. Verify link is created\n7. Verify link appears in both requirements",
+            "Preconditions": "Document with multiple requirements is opened",
+            "Expected Result": "Traceability link of selected type is created between requirements and visible from both ends",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "TR-005",
+            "Requirement ID": "DEMO-SRS-137",
+            "Test Case Description": "Create traceability links between multiple requirements",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select multiple source requirements\n3. Create links to multiple target requirements\n4. Select link type\n5. Confirm operation\n6. Verify links are created\n7. Verify matrix of links is created",
+            "Preconditions": "Document with multiple requirements is opened",
+            "Expected Result": "Traceability links of selected type are created between all selected source and target requirements",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "TR-006",
+            "Requirement ID": "DEMO-SRS-139",
+            "Test Case Description": "Change link type of existing traceability link",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement with link\n3. Select link\n4. Change link type\n5. Confirm operation\n6. Verify link type is changed",
+            "Preconditions": "Document with traceability links is opened",
+            "Expected Result": "Link type of selected traceability link is changed",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "TR-007",
+            "Requirement ID": "DEMO-SRS-140",
+            "Test Case Description": "Revert direction of traceability link",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement with outgoing link\n3. Select link\n4. Revert link direction\n5. Confirm operation\n6. Verify direction is reversed",
+            "Preconditions": "Document with traceability links is opened",
+            "Expected Result": "Direction of selected link is reversed (source becomes target and vice versa)",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "TR-008",
+            "Requirement ID": "DEMO-SRS-141",
+            "Test Case Description": "Remove traceability link",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement with link\n3. Select link\n4. Remove link\n5. Confirm operation\n6. Verify link is removed",
+            "Preconditions": "Document with traceability links is opened",
+            "Expected Result": "Selected link is permanently removed from document",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "TR-009",
+            "Requirement ID": "DEMO-SRS-138",
+            "Test Case Description": "Remove link type",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access link type settings\n3. Select link type\n4. Remove link type\n5. Confirm operation\n6. Verify link type is removed",
+            "Preconditions": "Document with link type is opened",
+            "Expected Result": "Selected link type is removed from link type definitions",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "TR-010",
+            "Requirement ID": "DEMO-SRS-161",
+            "Test Case Description": "Verify links are removed when link type is removed",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document with requirements having links of specific type\n2. Access link type settings\n3. Remove that link type\n4. Confirm operation\n5. Verify all links of that type are removed",
+            "Preconditions": "Document with requirements having links of specific type is opened",
+            "Expected Result": "All traceability links of the removed link type are removed from the document",
+            "Priority": "Medium"
+        }
+    ],
+    "Filtering and Search": [
+        {
+            "Test ID": "FS-001",
+            "Requirement ID": "DEMO-SRS-147",
+            "Test Case Description": "Filter requirements by simple DNF condition",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access filter function\n3. Enter simple DNF condition\n4. Apply filter\n5. Verify matching requirements are displayed\n6. Verify non-matching requirements are hidden",
+            "Preconditions": "Document with multiple requirements is opened",
+            "Expected Result": "Only requirements matching the DNF condition are displayed",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FS-002",
+            "Requirement ID": "DEMO-SRS-147",
+            "Test Case Description": "Filter requirements by complex DNF condition",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access filter function\n3. Enter complex DNF condition with multiple clauses\n4. Apply filter\n5. Verify matching requirements are displayed\n6. Verify non-matching requirements are hidden",
+            "Preconditions": "Document with multiple requirements is opened",
+            "Expected Result": "Only requirements matching the complex DNF condition are displayed",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FS-003",
+            "Requirement ID": "DEMO-SRS-147",
+            "Test Case Description": "Filter with invalid DNF condition",
+            "Test Type": "Negative",
+            "Test Steps": "1. Open document\n2. Access filter function\n3. Enter syntactically invalid DNF condition\n4. Attempt to apply filter",
+            "Preconditions": "Document with multiple requirements is opened",
+            "Expected Result": "Application displays appropriate error message indicating invalid filter syntax",
+            "Priority": "Low"
+        },
+        {
+            "Test ID": "FS-004",
+            "Requirement ID": "DEMO-SRS-148",
+            "Test Case Description": "Filter by section number",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access filter function\n3. Enter section number filter\n4. Apply filter\n5. Verify matching sections are displayed",
+            "Preconditions": "Document with multiple numbered sections is opened",
+            "Expected Result": "Only sections matching the filter condition are displayed",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FS-005",
+            "Requirement ID": "DEMO-SRS-148",
+            "Test Case Description": "Filter by section heading",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access filter function\n3. Enter section heading filter\n4. Apply filter\n5. Verify matching sections are displayed",
+            "Preconditions": "Document with multiple sections is opened",
+            "Expected Result": "Only sections matching the heading filter are displayed",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FS-006",
+            "Requirement ID": "DEMO-SRS-149",
+            "Test Case Description": "Filter by requirement text description",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access filter function\n3. Enter text description filter\n4. Apply filter\n5. Verify matching requirements are displayed",
+            "Preconditions": "Document with multiple requirements is opened",
+            "Expected Result": "Only requirements matching the text description filter are displayed",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FS-007",
+            "Requirement ID": "DEMO-SRS-149",
+            "Test Case Description": "Filter by custom attribute value",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access filter function\n3. Enter custom attribute filter\n4. Apply filter\n5. Verify matching requirements are displayed",
+            "Preconditions": "Document with requirements having custom attributes is opened",
+            "Expected Result": "Only requirements matching the custom attribute filter are displayed",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FS-008",
+            "Requirement ID": "DEMO-SRS-150",
+            "Test Case Description": "Filter requirements with missing traceability links",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access filter function\n3. Select missing links filter\n4. Select link type\n5. Apply filter\n6. Verify requirements without links of selected type are displayed",
+            "Preconditions": "Document with requirements having various link coverage is opened",
+            "Expected Result": "Only requirements missing links of selected type are displayed",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FS-009",
+            "Requirement ID": "DEMO-SRS-152",
+            "Test Case Description": "Search requirements by single keyword",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access search function\n3. Enter single keyword\n4. Execute search\n5. Verify matching requirements are highlighted",
+            "Preconditions": "Document with multiple requirements is opened",
+            "Expected Result": "Requirements containing the keyword are highlighted",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FS-010",
+            "Requirement ID": "DEMO-SRS-152",
+            "Test Case Description": "Search requirements by multiple keywords",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Access search function\n3. Enter multiple keywords\n4. Execute search\n5. Verify matching requirements are highlighted",
+            "Preconditions": "Document with multiple requirements is opened",
+            "Expected Result": "Requirements containing any of the keywords are highlighted",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FS-011",
+            "Requirement ID": "DEMO-SRS-153",
+            "Test Case Description": "Navigate to next search result",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Perform search with multiple matches\n3. Use next result control\n4. Verify focus moves to next matched requirement",
+            "Preconditions": "Document with multiple search matches is opened",
+            "Expected Result": "Focus moves to next matched requirement in document order",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "FS-012",
+            "Requirement ID": "DEMO-SRS-153",
+            "Test Case Description": "Navigate to previous search result",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Perform search with multiple matches\n3. Navigate to later match\n4. Use previous result control\n5. Verify focus moves to previous matched requirement",
+            "Preconditions": "Document with multiple search matches is opened",
+            "Expected Result": "Focus moves to previous matched requirement in document order",
+            "Priority": "Medium"
+        }
+    ],
+    "History and Changes": [
+        {
+            "Test ID": "HC-001",
+            "Requirement ID": "DEMO-SRS-159",
+            "Test Case Description": "Record requirement change metadata",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement\n3. Make changes to description\n4. Save changes\n5. Verify change record is created\n6. Verify metadata includes date, time, and author",
+            "Preconditions": "Document is opened",
+            "Expected Result": "Change record includes current date, time, and author information",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "HC-002",
+            "Requirement ID": "DEMO-SRS-159",
+            "Test Case Description": "Record metadata for attribute changes",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement\n3. Change custom attribute value\n4. Save changes\n5. Verify change record is created\n6. Verify metadata includes date, time, and author",
+            "Preconditions": "Document with requirements having custom attributes is opened",
+            "Expected Result": "Change record for attribute modification includes current date, time, and author information",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "HC-003",
+            "Requirement ID": "DEMO-SRS-101",
+            "Test Case Description": "Display history of requirement changes",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement with history\n3. View history pane\n4. Verify all changes are displayed\n5. Verify chronological ordering",
+            "Preconditions": "Document with requirements having change history is opened",
+            "Expected Result": "All changes are displayed ordered by date and time",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "HC-004",
+            "Requirement ID": "DEMO-SRS-102",
+            "Test Case Description": "Verify change record content",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement with history\n3. View history pane\n4. Examine change record\n5. Verify it contains author, date & time, and description of change",
+            "Preconditions": "Document with requirements having change history is opened",
+            "Expected Result": "Each change record contains author, date & time, and description of the change",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "HC-005",
+            "Requirement ID": "DEMO-SRS-103",
+            "Test Case Description": "Expand/collapse individual change in history pane",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement with history\n3. View history pane\n4. Expand a collapsed change\n5. Verify expanded state\n6. Collapse an expanded change\n7. Verify collapsed state",
+            "Preconditions": "Document with requirements having change history is opened",
+            "Expected Result": "Changes expand/collapse individually as requested",
+            "Priority": "Low"
+        },
+        {
+            "Test ID": "HC-006",
+            "Requirement ID": "DEMO-SRS-103",
+            "Test Case Description": "Expand/collapse all changes in history pane",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select requirement with multiple changes\n3. View history pane\n4. Use expand all function\n5. Verify all changes expand\n6. Use collapse all function\n7. Verify all changes collapse",
+            "Preconditions": "Document with requirements having multiple changes is opened",
+            "Expected Result": "All changes expand/collapse as requested",
+            "Priority": "Low"
+        }
+    ],
+    "Auto Save": [
+        {
+            "Test ID": "AS-001",
+            "Requirement ID": "DEMO-SRS-144",
+            "Test Case Description": "Verify auto-save of document changes",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Make changes to requirement\n3. Force application restart (close and reopen)\n4. Verify changes are preserved",
+            "Preconditions": "Document is opened",
+            "Expected Result": "All document changes are automatically persisted and restored after restart",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "AS-002",
+            "Requirement ID": "DEMO-SRS-144",
+            "Test Case Description": "Verify auto-save during continuous editing",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Make continuous changes over period of time\n3. Force application crash\n4. Restart application\n5. Verify recent changes are preserved",
+            "Preconditions": "Document is opened",
+            "Expected Result": "Recent changes are automatically persisted and restored after crash",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "AS-003",
+            "Requirement ID": "DEMO-SRS-144",
+            "Test Case Description": "Verify auto-save with low disk space",
+            "Test Type": "Edge Case",
+            "Test Steps": "1. Configure system with very limited free disk space\n2. Open document\n3. Make changes\n4. Force application restart\n5. Observe behavior",
+            "Preconditions": "Document is opened and system has limited disk space",
+            "Expected Result": "Application either persists changes or provides clear error message about disk space limitations",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "AS-004",
+            "Requirement ID": "DEMO-SRS-160",
+            "Test Case Description": "Verify clearing of persisted data on document close",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Make changes\n3. Close document\n4. Restart application\n5. Verify no persisted data remains\n6. Open same document\n7. Verify changes are not present",
+            "Preconditions": "Document is opened",
+            "Expected Result": "All persisted document data is cleared when document is closed",
+            "Priority": "Medium"
+        }
+    ],
+    "Reporting": [
+        {
+            "Test ID": "RP-001",
+            "Requirement ID": "DEMO-SRS-163",
+            "Test Case Description": "Print requirements table",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select print option\n3. Verify print dialog appears\n4. Verify print preview shows correct content",
+            "Preconditions": "Document is opened and printer is configured",
+            "Expected Result": "Requirements table is sent to printer with correct formatting",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "RP-002",
+            "Requirement ID": "DEMO-SRS-163",
+            "Test Case Description": "Print filtered requirements table",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Apply filters\n3. Select print option\n4. Verify print dialog appears\n5. Verify print preview shows only filtered content",
+            "Preconditions": "Document is opened with filters applied and printer is configured",
+            "Expected Result": "Only filtered requirements are sent to printer",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "RP-003",
+            "Requirement ID": "DEMO-SRS-164",
+            "Test Case Description": "Create PDF of requirements table",
+            "Test Type": "Functional",
+            "Test Steps": "1. Open document\n2. Select create PDF option\n3. Choose file location\n4. Verify PDF is created\n5. Open PDF to verify content and formatting",
+            "Preconditions": "Document is opened",
+            "Expected Result": "PDF containing requirements table is created with correct content and formatting",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "RP-004",
+            "Requirement ID": "DEMO-SRS-164",
+            "Test Case Description": "Create PDF with insufficient permissions",
+            "Test Type": "Negative",
+            "Test Steps": "1. Open document\n2. Select create PDF option\n3. Choose location with insufficient write permissions\n4. Confirm operation",
+            "Preconditions": "Document is opened and location with insufficient permissions exists",
+            "Expected Result": "Application displays appropriate error message indicating permission issues",
+            "Priority": "Low"
+        }
+    ],
+    "Performance": [
+        {
+            "Test ID": "PF-001",
+            "Requirement ID": "DEMO-SRS-174",
+            "Test Case Description": "Verify application startup time with small document",
+            "Test Type": "Performance",
+            "Test Steps": "1. Prepare small document\n2. Start application with document\n3. Measure time from start until document is displayed using stopwatch\n4. Repeat 5 times and calculate average",
+            "Preconditions": "Small document exists and application is not running",
+            "Expected Result": "Document is displayed within 10 seconds of application start (average of 5 runs)",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "PF-002",
+            "Requirement ID": "DEMO-SRS-174",
+            "Test Case Description": "Verify application startup time with large document",
+            "Test Type": "Performance",
+            "Test Steps": "1. Prepare large document (5000+ requirements)\n2. Start application with document\n3. Measure time from start until document is displayed using stopwatch\n4. Repeat 5 times and calculate average",
+            "Preconditions": "Large document exists and application is not running",
+            "Expected Result": "Document is displayed within 10 seconds of application start (average of 5 runs)",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "PF-003",
+            "Requirement ID": "DEMO-SRS-171",
+            "Test Case Description": "Verify edit response time for text changes",
+            "Test Type": "Performance",
+            "Test Steps": "1. Open document\n2. Select requirement\n3. Start timer\n4. Edit text description\n5. Stop timer when update appears\n6. Repeat 10 times and calculate average",
+            "Preconditions": "Document is opened",
+            "Expected Result": "Updated values are displayed within 1 second of edit operation (average of 10 edits)",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "PF-004",
+            "Requirement ID": "DEMO-SRS-171",
+            "Test Case Description": "Verify edit response time for attribute changes",
+            "Test Type": "Performance",
+            "Test Steps": "1. Open document\n2. Select requirement\n3. Start timer\n4. Change attribute value\n5. Stop timer when update appears\n6. Repeat 10 times and calculate average",
+            "Preconditions": "Document with requirements having custom attributes is opened",
+            "Expected Result": "Updated values are displayed within 1 second of edit operation (average of 10 edits)",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "PF-005",
+            "Requirement ID": "DEMO-SRS-173",
+            "Test Case Description": "Verify smooth scrolling with small document",
+            "Test Type": "Performance",
+            "Test Steps": "1. Open small document\n2. Record screen while scrolling through requirements\n3. Analyze recording for jerks\n4. Measure duration of any jerks",
+            "Preconditions": "Small document is opened and screen recording software is available",
+            "Expected Result": "No scrolling jerks longer than 200ms are observed",
+            "Priority": "Low"
+        },
+        {
+            "Test ID": "PF-006",
+            "Requirement ID": "DEMO-SRS-173",
+            "Test Case Description": "Verify smooth scrolling with large document",
+            "Test Type": "Performance",
+            "Test Steps": "1. Open large document (5000+ requirements)\n2. Record screen while scrolling through requirements\n3. Analyze recording for jerks\n4. Measure duration of any jerks",
+            "Preconditions": "Large document is opened and screen recording software is available",
+            "Expected Result": "No scrolling jerks longer than 200ms are observed",
+            "Priority": "Low"
+        },
+        {
+            "Test ID": "PF-007",
+            "Requirement ID": "DEMO-SRS-170",
+            "Test Case Description": "Verify maximum document size handling",
+            "Test Type": "Performance",
+            "Test Steps": "1. Create document with 10000 objects\n2. Add 100 file attachments with total size of 100MB\n3. Open document\n4. Perform basic operations (scroll, edit, filter)\n5. Measure response times",
+            "Preconditions": "Large test document exists",
+            "Expected Result": "Application opens and handles document at size limits without errors or significant performance degradation",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "PF-008",
+            "Requirement ID": "DEMO-SRS-170",
+            "Test Case Description": "Verify behavior when exceeding maximum document size",
+            "Test Type": "Edge Case",
+            "Test Steps": "1. Create document exceeding limits (>10000 objects or >100 attachments or >100MB)\n2. Attempt to open document\n3. Observe behavior",
+            "Preconditions": "Document exceeding size limits exists",
+            "Expected Result": "Application either handles oversized document or provides clear error message about size limitations",
+            "Priority": "Medium"
+        }
+    ],
+    "Security": [
+        {
+            "Test ID": "SC-001",
+            "Requirement ID": "DEMO-SRS-194",
+            "Test Case Description": "Verify encryption of persistent data",
+            "Test Type": "Security",
+            "Test Steps": "1. Create document with sensitive data\n2. Save document\n3. Locate persisted data files\n4. Examine file content using hex editor\n5. Verify content is not in plaintext",
+            "Preconditions": "Application is running",
+            "Expected Result": "Persistent application data is stored in encrypted format, not plaintext",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "SC-002",
+            "Requirement ID": "DEMO-SRS-194",
+            "Test Case Description": "Verify encryption strength",
+            "Test Type": "Security",
+            "Test Steps": "1. Create document with known content\n2. Save document\n3. Locate persisted data files\n4. Analyze encryption using cryptographic tools\n5. Verify encryption algorithm and strength",
+            "Preconditions": "Application is running and cryptographic analysis tools are available",
+            "Expected Result": "Encryption uses industry-standard algorithm with appropriate key length",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "SC-003",
+            "Requirement ID": "DEMO-SRS-176",
+            "Test Case Description": "Verify no data is sent to Internet",
+            "Test Type": "Security",
+            "Test Steps": "1. Configure network monitoring tool\n2. Start capturing all network traffic\n3. Perform various operations in application (create, edit, save, import, export)\n4. Analyze captured traffic",
+            "Preconditions": "Application is running with network monitoring tools active",
+            "Expected Result": "No project data is transmitted to any external servers",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "SC-004",
+            "Requirement ID": "DEMO-SRS-199",
+            "Test Case Description": "Verify input sanitization - XSS patterns",
+            "Test Type": "Security",
+            "Test Steps": "1. Open document\n2. Attempt to input XSS patterns in various fields\n3. Save document\n4. Verify rendering of input\n5. Verify no script execution",
+            "Preconditions": "Application is running",
+            "Expected Result": "XSS patterns are either rejected or sanitized to prevent script execution",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "SC-005",
+            "Requirement ID": "DEMO-SRS-199",
+            "Test Case Description": "Verify input sanitization - file import",
+            "Test Type": "Security",
+            "Test Steps": "1. Create Word/Excel document with malicious content (macros, scripts)\n2. Import document\n3. Verify application behavior\n4. Verify no execution of malicious content",
+            "Preconditions": "Application is running and test document with malicious content exists",
+            "Expected Result": "Malicious content is sanitized during import with no execution",
+            "Priority": "High"
+        }
+    ],
+    "System Compatibility": [
+        {
+            "Test ID": "SC-101",
+            "Requirement ID": "DEMO-SRS-195",
+            "Test Case Description": "Verify browser compatibility - Chrome latest",
+            "Test Type": "Compatibility",
+            "Test Steps": "1. Install latest Chrome version\n2. Launch application\n3. Perform basic operations (create, edit, save, import, export)\n4. Verify UI rendering\n5. Verify functionality",
+            "Preconditions": "Latest Chrome browser is installed",
+            "Expected Result": "Application runs correctly in latest Chrome with proper UI rendering and functionality",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "SC-102",
+            "Requirement ID": "DEMO-SRS-195",
+            "Test Case Description": "Verify browser compatibility - Firefox latest",
+            "Test Type": "Compatibility",
+            "Test Steps": "1. Install latest Firefox version\n2. Launch application\n3. Perform basic operations (create, edit, save, import, export)\n4. Verify UI rendering\n5. Verify functionality",
+            "Preconditions": "Latest Firefox browser is installed",
+            "Expected Result": "Application runs correctly in latest Firefox with proper UI rendering and functionality",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "SC-103",
+            "Requirement ID": "DEMO-SRS-195",
+            "Test Case Description": "Verify browser compatibility - Chrome previous version",
+            "Test Type": "Compatibility",
+            "Test Steps": "1. Install previous major Chrome version\n2. Launch application\n3. Perform basic operations\n4. Verify UI rendering\n5. Verify functionality",
+            "Preconditions": "Previous major Chrome version is installed",
+            "Expected Result": "Application runs correctly in previous Chrome version",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "SC-104",
+            "Requirement ID": "DEMO-SRS-195",
+            "Test Case Description": "Verify browser compatibility - Firefox previous version",
+            "Test Type": "Compatibility",
+            "Test Steps": "1. Install previous major Firefox version\n2. Launch application\n3. Perform basic operations\n4. Verify UI rendering\n5. Verify functionality",
+            "Preconditions": "Previous major Firefox version is installed",
+            "Expected Result": "Application runs correctly in previous Firefox version",
+            "Priority": "Medium"
+        },
+        {
+            "Test ID": "SC-105",
+            "Requirement ID": "DEMO-SRS-195",
+            "Test Case Description": "Verify OS compatibility - Windows",
+            "Test Type": "Compatibility",
+            "Test Steps": "1. Install Chrome/Firefox on Windows\n2. Launch application\n3. Perform basic operations\n4. Verify functionality",
+            "Preconditions": "Windows OS with Chrome or Firefox installed",
+            "Expected Result": "Application runs correctly on Windows",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "SC-106",
+            "Requirement ID": "DEMO-SRS-195",
+            "Test Case Description": "Verify OS compatibility - Mac",
+            "Test Type": "Compatibility",
+            "Test Steps": "1. Install Chrome/Firefox on Mac\n2. Launch application\n3. Perform basic operations\n4. Verify functionality",
+            "Preconditions": "Mac OS with Chrome or Firefox installed",
+            "Expected Result": "Application runs correctly on Mac",
+            "Priority": "High"
+        },
+        {
+            "Test ID": "SC-107",
+            "Requirement ID": "DEMO-SRS-195",
+            "Test Case Description": "Verify OS compatibility - Linux",
+            "Test Type": "Compatibility",
+            "Test Steps": "1. Install Chrome/Firefox on Linux\n2. Launch application\n3. Perform basic operations\n4. Verify functionality",
+            "Preconditions": "Linux OS with Chrome or Firefox installed",
+            "Expected Result": "Application runs correctly on Linux",
+            "Priority": "High"
+        }
+    ]
+}
