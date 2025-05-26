@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import base64
-from test_case_gen import gen_requirements_pdf_to_test_case
+from Agents.test_case_gen import gen_requirements_pdf_to_test_case
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes

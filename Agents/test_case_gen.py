@@ -12,15 +12,15 @@ from dotenv import load_dotenv
 
 load_dotenv()
 llm_api_key = os.getenv("ANTHROPIC_API_KEY")
-api_max_tokens = 64000          # Maximum ammount
+api_max_tokens = 64000                      # Maximum ammount
 
 """ PATHS VARIABLES """
-path_to_initPrompt_1 = r"Prompts\initial_prompt_1.txt"
-path_to_pdf = "ReqView-Example_Software_Requirements_Specification_SRS_Document.pdf"
-path_to_initPrompt_2 = r"Prompts\initial_prompt_2.txt"
-path_to_reflectionPrompt = r"Prompts\reflection_prompt.txt"
-path_to_finalPrompt = r"Prompts\final_prompt.txt"
-path_to_output = "output_test_matrix.json"
+path_to_initPrompt_1 = r"..\Prompts\initial_prompt_1.txt"
+path_to_pdf = r"..\ReqView-Example_Software_Requirements_Specification_SRS_Document.pdf"
+path_to_initPrompt_2 = r"..\Prompts\initial_prompt_2.txt"
+path_to_reflectionPrompt = r"..\Prompts\reflection_prompt.txt"
+path_to_finalPrompt = r"..\Prompts\final_prompt.txt"
+path_to_output = r"..\Outputs\output_test_matrix.json"
 
 
 
