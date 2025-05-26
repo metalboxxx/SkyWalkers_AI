@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import base64
-from Agents.test_case_gen import gen_requirements_pdf_to_test_case
+from Agents.gen_test_cases import generate_test_cases_from_requirements
 
 app = Flask(__name__)
 CORS(app)  # Enable CORS for all routes
@@ -24,7 +24,7 @@ def generate_test_cases():
         pdf_data = base64.b64encode(file.read()).decode('utf-8')
         
         # Generate test cases
-        test_cases = gen_requirements_pdf_to_test_case(pdf_data)
+        test_cases = generate_test_cases_from_requirements(pdf_data)
         
         return jsonify(test_cases)
     

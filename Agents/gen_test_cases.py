@@ -15,13 +15,10 @@ llm_api_key = os.getenv("ANTHROPIC_API_KEY")
 api_max_tokens = 64000                      # Maximum ammount
 
 """ PATHS VARIABLES """
-path_to_initPrompt_1 = r"..\Prompts\initial_prompt_1.txt"
-path_to_pdf = r"..\ReqView-Example_Software_Requirements_Specification_SRS_Document.pdf"
-path_to_initPrompt_2 = r"..\Prompts\initial_prompt_2.txt"
-path_to_reflectionPrompt = r"..\Prompts\reflection_prompt.txt"
-path_to_finalPrompt = r"..\Prompts\final_prompt.txt"
-path_to_output = r"..\Outputs\output_test_matrix.json"
-
+path_to_initPrompt_1 = r"..\Prompts\gen_test_cases\initial_prompt_1.txt"
+path_to_initPrompt_2 = r"..\Prompts\gen_test_cases\initial_prompt_2.txt"
+path_to_reflectionPrompt = r"..\Prompts\gen_test_cases\reflection_prompt.txt"
+path_to_finalPrompt = r"..\Prompts\gen_test_cases\final_prompt.txt"
 
 
 
@@ -35,25 +32,27 @@ llm = ChatAnthropic(
     api_key = llm_api_key
 )
 
-def gen_requirements_pdf_to_test_case(pdf_in_base64_encoded_string: str):
+def generate_test_cases_from_requirements(list_of_requirements: dict) -> dict:
     """
     Params: 
-    str: pdf encode into base64 encoded string
+    dict: list of requirements
 
     Output:
-    dict: test cases
+    dict: list of test cases
 
     """
 
 
     """
     1. Get the prompts
+        Prompt CONTENT are written to satisfy Athropic model.
     """
     with open(path_to_initPrompt_1,"r") as f:
         initPrompt_1 = f.read()
 
     with open(path_to_initPrompt_2,"r") as f:
-        initPrompt_2 = f.read()
+        initPrompt_2 = f.read()\
+        
         
     content_prompt_initial = [
                     {
@@ -61,13 +60,8 @@ def gen_requirements_pdf_to_test_case(pdf_in_base64_encoded_string: str):
                         "text": initPrompt_1
                     },
                     {
-                        "type": "document",
-                        "source": {
-                            "type": "base64",
-                            "media_type": "application/pdf",
-                            "data": pdf_in_base64_encoded_string
-                        },
-                        "cache_control": {"type": "ephemeral"}
+                        "type": "text",
+                        "text": str(list_of_requirements)
                     },
                     {
                         "type": "text",

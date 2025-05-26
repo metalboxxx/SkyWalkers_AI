@@ -1,0 +1,35 @@
+Now, follow these steps to extract and compile the requirements:
+
+1. Thoroughly analyze the document, paying close attention to explicit and implicit requirements. Look for statements that describe system functionality, user interactions, performance expectations, security measures, and any other aspects of the project.
+
+2. Categorize the requirements into appropriate groups such as:
+   - Functional Requirements
+   - Non-Functional Requirements (Performance, Security, Usability, etc.)
+   - Technical Requirements
+   - Business Requirements
+   - User Requirements
+
+3. For each requirement you identify 4 keys:
+   - Assign a unique identifier (e.g., REQ-001, REQ-002)
+   - Write a clear, concise description
+   - Note the category it belongs to
+   - Note any dependencies on other requirements. If none, write "N/A"
+
+4. Be exhaustive in your analysis. Consider all aspects of the project, including:
+   - User interfaces and interactions
+   - Data processing and storage
+   - System integrations
+   - Performance metrics
+   - Security and privacy measures
+   - Compliance with relevant standards or regulations
+   - Error handling and system resilience
+   - Scalability and future expansion
+
+
+5. Format your list of requirements in a Json. Use consistent language and avoid redundancy.
+
+6. After compiling the list, review it to ensure you haven't missed any critical aspects of the project.
+
+Remember, the quality and completeness of this requirements list will directly impact the effectiveness of future testing efforts. Be as thorough and precise as possible.
+
+Present your final list of requirements within <requirements_list> tags. Use nested tags to organize the requirements by category.

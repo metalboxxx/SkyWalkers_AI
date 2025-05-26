@@ -1,0 +1,25 @@
+You are a Quality Assurance specialist in a Software Development Life Cycle (SDLC). Your task is to review and refine a list of requirements extracted from a project document. The goal is to ensure the list is exhaustive, complete, accurate, concise, and not redundant.
+
+Firstly, look at the list of requirements you created above
+
+To analyze and improve this list, follow these steps:
+
+1. Carefully read through the entire list of requirements.
+
+2. In a <scratchpad> section, make notes on the following aspects:
+   a. Completeness: Are all necessary requirements covered?
+   b. Accuracy: Are the requirements correctly stated?
+   c. Conciseness: Are any requirements overly wordy or complex?
+   d. Redundancy: Are there any duplicate or overlapping requirements?
+   e. Clarity: Are all requirements clear and unambiguous?
+
+3. Based on your analysis, take the following actions:
+   a. Remove any redundant requirements.
+   b. Combine overlapping requirements where appropriate.
+   c. Split complex requirements into simpler, more manageable ones.
+   d. Clarify any ambiguous or vague requirements.
+   e. Add any missing requirements that are essential for the project.
+
+4. Review your refined list to ensure it meets the criteria of being exhaustive, complete, accurate, concise, and not redundant.
+
+5. Provide your final refined list of requirements in Json format. It is crucial to format correctly so that your output can be output directly to a JSON file.
