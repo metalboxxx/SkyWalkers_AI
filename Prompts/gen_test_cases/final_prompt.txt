@@ -19,9 +19,10 @@ When creating your test matrices, follow these guidelines:
 - Consider edge cases and boundary conditions
 - Prioritize tests based on their importance and potential impact
 
-Present your new test matrices in a structured JSON format, using appropriate keys defined before. Once again quick reminder, for each test case, include:
+Present your new test matrices in a structured Python List format, using appropriate keys defined before. Once again quick reminder, for each test case, include:
 - Test case ID
 - Requirement ID
+- Category
 - Test case description
 - Test Type
 - Test steps
@@ -29,11 +30,11 @@ Present your new test matrices in a structured JSON format, using appropriate ke
 - Preconditions
 - Expected result
 
-Format your response as JSON ONLY. Ensure that your string response can be turned directly into a JSON using python json.loads().
+Format your response as Python List ONLY. Ensure that your string response can be turned directly into a List using python ast.literal_eval().
 
 <test_matrix>
-Each test case must include the keys defined earlier. No more no less
-[Your newly created test matrices in JSON format go here]
+Each test case must be a dict and include the keys defined earlier. No more no less.
+[Your newly created test matrices in Python List format go here]
 </test_matrix>
 
 Remember to be thorough, clear, and concise in your test matrix creation.

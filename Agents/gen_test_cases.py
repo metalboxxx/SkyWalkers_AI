@@ -1,6 +1,6 @@
 import os
 import json
-import base64
+import ast
 from langchain_anthropic import ChatAnthropic
 from typing import TypedDict, Annotated
 from langchain_core.messages import AnyMessage, HumanMessage, AIMessage
@@ -32,7 +32,7 @@ llm = ChatAnthropic(
     api_key = llm_api_key
 )
 
-def generate_test_cases_from_requirements(list_of_requirements: dict) -> dict:
+def generate_test_cases_from_requirements(list_of_requirements: list, context: str) -> list:
     """
     Params: 
     dict: list of requirements
@@ -62,6 +62,10 @@ def generate_test_cases_from_requirements(list_of_requirements: dict) -> dict:
                     {
                         "type": "text",
                         "text": str(list_of_requirements)
+                    },
+                    {
+                        "type": "text",
+                        "text": context
                     },
                     {
                         "type": "text",
@@ -104,8 +108,8 @@ def generate_test_cases_from_requirements(list_of_requirements: dict) -> dict:
         return{"messages": [HumanMessage(content=content_prompt_reflection), model_response]}
 
     def write_final(state: AgentState):
-        prompt_messages = state['messages'] + [HumanMessage(content=content_prompt_final)] +  [AIMessage(content="{")]
-        ## The AIMessage { is to tell Claude to only create JSON
+        prompt_messages = state['messages'] + [HumanMessage(content=content_prompt_final)] +  [AIMessage(content="[")]
+        ## The AIMessage [ is to tell Claude to only create list
         model_response = llm.invoke(prompt_messages)
 
         return{"messages":[HumanMessage(content=content_prompt_final), model_response]}
@@ -137,14 +141,14 @@ def generate_test_cases_from_requirements(list_of_requirements: dict) -> dict:
     5. Output Parsing
     """
     
-    output_testCase_JSON_string = langchainConfig_messages['messages'][-1].content
+    output_testCase_string = langchainConfig_messages['messages'][-1].content
     
     try:
-        output_testCase_JSON = json.loads("{"+output_testCase_JSON_string)
+        output_testCase_list = ast.literal_eval("["+output_testCase_string)
     except json.JSONDecodeError as e:
         print(f"AI failed to generate appropriate JSON error: {e}")
 
-    return output_testCase_JSON
+    return output_testCase_list
 
 
 

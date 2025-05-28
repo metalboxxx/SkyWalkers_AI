@@ -1,6 +1,6 @@
 import os
 import json
-import base64
+import ast
 from langchain_anthropic import ChatAnthropic
 from typing import TypedDict, Annotated
 from langchain_core.messages import AnyMessage, HumanMessage, AIMessage
@@ -16,8 +16,9 @@ api_max_tokens = 64000                      # Maximum ammount
 
 """ PATHS VARIABLES """
 path_to_initPrompt_1 = r"..\Prompts\gen_requirements\initial_prompt_1.txt"
-path_to_initPrompt_2 = r"..\Prompts\gen_test_ca\initial_prompt_2.txt"
+path_to_initPrompt_2 = r"..\Prompts\gen_requirements\initial_prompt_2.txt"
 path_to_reflectionArewrite_Prompt = r"..\Prompts\gen_requirements\reflection_and_rewrite_prompt.txt"
+path_to_summaryPrompt = r"..\Prompts\gen_requirements\context_summary.txt"
 
 
 class AgentState(TypedDict):
@@ -30,19 +31,20 @@ llm = ChatAnthropic(
     api_key = llm_api_key
 )
 
-def generate_test_cases_from_requirements(pdf_in_base64_encoded_string: str) -> dict:
+def generate_requirement_from_doc(pdf_in_base64_encoded_string: str) -> tuple[list,str]:
     """
     Params: 
     str: Base64 encoded string representation of the pdf
 
     Output:
-    dict: list of requirements
+    list: list of requirements
+    str: Context summary of the document
 
     """
 
 
     """
-    1. Get the prompts
+    1. Load the prompts
         Prompt CONTENT are written to satisfy Athropic model.
     """
     with open(path_to_initPrompt_1,"r") as f:
@@ -79,7 +81,14 @@ def generate_test_cases_from_requirements(pdf_in_base64_encoded_string: str) -> 
                         "text": reflection_and_rewrite_Prompt
                     }
                 ]
-
+    with open(path_to_summaryPrompt,"r") as f:
+        summary_Prompt = f.read()
+        content_prompt_summary = [
+                    {
+                        "type": "text",
+                        "text": summary_Prompt
+                    }
+                ]        
 
     """
     2. Define writing Steps
@@ -89,13 +98,11 @@ def generate_test_cases_from_requirements(pdf_in_base64_encoded_string: str) -> 
         
         return {"messages": [HumanMessage(content=content_prompt_initial), model_response]}
         
-    def write_reflection_and_final(state: AgentState):
-        prompt_messages = state['messages'] + [HumanMessage(content=content_prompt_reflection_and_rewrite)] 
+    def write_summary(state: AgentState):
+        prompt_messages = state['messages'] + [HumanMessage(content=content_prompt_summary)] + [AIMessage(content="[")]
         model_response = llm.invoke(prompt_messages)
 
-        return{"messages": [HumanMessage(content=content_prompt_reflection_and_rewrite), model_response]}
-
-
+        return{"messages": [HumanMessage(content=content_prompt_summary), model_response]}
 
     """
     3. Build graph
@@ -103,10 +110,11 @@ def generate_test_cases_from_requirements(pdf_in_base64_encoded_string: str) -> 
     builder = StateGraph(AgentState)
     builder.add_node(write_initial_draft, "write_initial_draft")
     builder.add_node(write_reflection_and_final, "write_reflection_and_final")
-
+    builder.add_node(write_summary, "write_summary")
     builder.add_edge(START, "write_initial_draft")
     builder.add_edge("write_initial_draft","write_reflection_and_final")
-    builder.add_edge("write_reflection_and_final",END)
+    builder.add_edge("write_reflection_and_final","write_summary")
+    builder.add_edge("write_summary", END)
 
     graph = builder.compile()
 
@@ -122,14 +130,15 @@ def generate_test_cases_from_requirements(pdf_in_base64_encoded_string: str) -> 
     5. Output Parsing
     """
     
-    output_requirements_JSON_string = langchainConfig_messages['messages'][-1].content
-    
-    try:
-        output_requirements_JSON = json.loads("{"+output_requirements_JSON_string)
-    except json.JSONDecodeError as e:
-        print(f"AI failed to generate appropriate JSON error: {e}")
+    output_requirements_string = langchainConfig_messages['messages'][-3].content
+    output_summary_string = langchainConfig_messages['messages'][-1].content
 
-    return output_requirements_JSON
+    try:
+        output_requirements_list = ast.literal_eval("["+output_requirements_string)
+    except json.JSONDecodeError as e:
+        print(f"AI failed to generate requirements in appropriate format error: {e}")
+
+    return output_summary_string, output_requirements_list
 
 
 

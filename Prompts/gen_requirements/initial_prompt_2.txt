@@ -9,13 +9,15 @@ Now, follow these steps to extract and compile the requirements:
    - Business Requirements
    - User Requirements
 
-3. For each requirement you identify 4 keys:
+3. For each requirement you make it into a dict of 4 keys:
    - Assign a unique identifier (e.g., REQ-001, REQ-002)
    - Write a clear, concise description
    - Note the category it belongs to
    - Note any dependencies on other requirements. If none, write "N/A"
 
-4. Be exhaustive in your analysis. Consider all aspects of the project, including:
+4. Insert the newly created requirement dict into a Python list
+
+5. Be exhaustive in your analysis. Consider all aspects of the project, including:
    - User interfaces and interactions
    - Data processing and storage
    - System integrations
@@ -25,11 +27,7 @@ Now, follow these steps to extract and compile the requirements:
    - Error handling and system resilience
    - Scalability and future expansion
 
+6. Format your list of requirements in a Python List ONLY. Make sure to make the List correct as your string output will be directly transformed into a List object in Python program.
 
-5. Format your list of requirements in a Json. Use consistent language and avoid redundancy.
-
-6. After compiling the list, review it to ensure you haven't missed any critical aspects of the project.
-
+7. After compiling the list, review it to ensure you haven't missed any critical aspects of the project.
 Remember, the quality and completeness of this requirements list will directly impact the effectiveness of future testing efforts. Be as thorough and precise as possible.
-
-Present your final list of requirements within <requirements_list> tags. Use nested tags to organize the requirements by category.

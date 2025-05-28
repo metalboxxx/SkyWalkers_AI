@@ -22,4 +22,4 @@ To analyze and improve this list, follow these steps:
 
 4. Review your refined list to ensure it meets the criteria of being exhaustive, complete, accurate, concise, and not redundant.
 
-5. Provide your final refined list of requirements in Json format. It is crucial to format correctly so that your output can be output directly to a JSON file.
+5. Provide your final refined list of requirements in Python List. It is crucial to format correctly so that your output can be directly transformed to a Python List object.
