@@ -98,6 +98,12 @@ def generate_requirement_from_doc(pdf_in_base64_encoded_string: str) -> tuple[li
         
         return {"messages": [HumanMessage(content=content_prompt_initial), model_response]}
         
+    def write_reflection_and_final(state: AgentState):
+        prompt_messages = state['messages'] + [HumanMessage(content=content_prompt_reflection_and_rewrite)]
+        model_response = llm.invoke(prompt_messages)
+
+        return{"messages": [HumanMessage(content=content_prompt_reflection_and_rewrite), model_response]}
+
     def write_summary(state: AgentState):
         prompt_messages = state['messages'] + [HumanMessage(content=content_prompt_summary)] + [AIMessage(content="[")]
         model_response = llm.invoke(prompt_messages)
@@ -138,7 +144,7 @@ def generate_requirement_from_doc(pdf_in_base64_encoded_string: str) -> tuple[li
     except json.JSONDecodeError as e:
         print(f"AI failed to generate requirements in appropriate format error: {e}")
 
-    return output_summary_string, output_requirements_list
+    return output_requirements_list, output_summary_string
 
 
 
