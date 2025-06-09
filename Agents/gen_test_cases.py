@@ -109,7 +109,7 @@ def generate_test_cases_from_requirements(list_of_requirements: list, context: s
         return{"messages": [HumanMessage(content=content_prompt_reflection), model_response]}
 
     def write_final(state: AgentState):
-        prompt_messages = state['messages'] + [HumanMessage(content=content_prompt_final)] +  [AIMessage(content="[")]
+        prompt_messages = state['messages'] + [HumanMessage(content=content_prompt_final)] 
         ## The AIMessage [ is to tell Claude to only create list
         model_response = llm.invoke(prompt_messages)
 
@@ -145,7 +145,7 @@ def generate_test_cases_from_requirements(list_of_requirements: list, context: s
     output_testCase_string = langchainConfig_messages['messages'][-1].content
     
     try:
-        output_testCase_list = ast.literal_eval("["+output_testCase_string)
+        output_testCase_list = ast.literal_eval(output_testCase_string)
     except json.JSONDecodeError as e:
         print(f"AI failed to generate appropriate JSON error: {e}")
 
