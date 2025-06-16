@@ -1,6 +1,6 @@
 import os
 import json
-import ast
+import base64
 from langchain_anthropic import ChatAnthropic
 from typing import TypedDict, Annotated
 from langchain_core.messages import AnyMessage, HumanMessage, AIMessage
@@ -31,10 +31,10 @@ llm = ChatAnthropic(
     api_key = llm_api_key
 )
 
-def generate_requirement_from_doc(pdf_in_base64_encoded_string: str) -> tuple[list,str]:
+def generate_requirements_from_doc(path_to_document_pdf: str) -> tuple[list,str]:
     """
     Params: 
-    str: Base64 encoded string representation of the pdf
+    str: path to where the pdf is stored on the local system
 
     Output:
     list: list of requirements
@@ -52,7 +52,20 @@ def generate_requirement_from_doc(pdf_in_base64_encoded_string: str) -> tuple[li
 
     with open(path_to_initPrompt_2,"r") as f:
         initPrompt_2 = f.read()
-        
+    
+    
+    try:
+        if not os.path.isfile(path_to_document_pdf):
+            raise FileNotFoundError(f"File not found: {path_to_document_pdf}")
+        with open(path_to_document_pdf, 'rb') as f:
+            pdf_in_base64_encoded_string = base64.standard_b64encode(f.read()).decode('utf-8')
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+    except PermissionError:
+        print("Error: Permission denied when trying to read the file.")
+    except Exception as e:
+        print(f"An unexpected error occurred: {e}")
+
     content_prompt_initial = [
                     {
                         "type": "text",
@@ -140,9 +153,11 @@ def generate_requirement_from_doc(pdf_in_base64_encoded_string: str) -> tuple[li
     output_summary_string = langchainConfig_messages['messages'][-1].content
 
     try:
-        output_requirements_list = ast.literal_eval("["+output_requirements_string)
+        output_requirements_list = json.loads(output_requirements_string)
     except json.JSONDecodeError as e:
         print(f"AI failed to generate requirements in appropriate format error: {e}")
+        print(repr(output_requirements_string))
+
 
     return output_requirements_list, output_summary_string
 

@@ -13,8 +13,7 @@ You have access to two primary tools:
 
 1. PDF Requirements Extraction Tool (generate_requirements_from_document_pdf_tool):
 Input Parameter:
-x: A base64-encoded string representing a PDF document. Note: This string can be very long (up to 8000 tokens) and contains no human-readable language. Treat it as an opaque data blob and pass the entire string without any interpretation or truncation.
-Behavior:
+x: The path to the pdf document from which the tool will generate requirements
  - Decodes the PDF to extract a concise summary and a structured list of project requirements.
  - Updates state["context"] with the extracted summary.
  - Updates state["requirements"] with the list of requirements.

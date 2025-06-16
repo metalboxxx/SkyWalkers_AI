@@ -16,5 +16,5 @@ To create this summary, follow these guidelines:
 8. Include any relevant timelines or deadlines mentioned in the project document.
 
 Your summary should be well-structured, easy to read, and typically between 300-500 words. Focus on the most crucial information that will aid in creating comprehensive test matrices.
-Present your context summary within <context_summary> tags. Begin with a title "Project Context Summary" in bold, followed by your summary content.
+Your response must ONLY include your context summary. No need for headings or openings. Just write the main body part
 Remember, the goal is to provide a clear and accurate overview that will help QA testers create thorough and effective test cases based on the project requirements.
