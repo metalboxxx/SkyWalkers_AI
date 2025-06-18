@@ -145,9 +145,11 @@ def generate_test_cases_from_requirements(list_of_requirements: list, context: s
     output_testCase_string = langchainConfig_messages['messages'][-1].content
     
     try:
-        output_testCase_list = ast.literal_eval(output_testCase_string)
+        output_testCase_list = json.loads(output_testCase_string)
     except json.JSONDecodeError as e:
         print(f"AI failed to generate appropriate JSON error: {e}")
+        print(repr(output_testCase_string))
+
 
     return output_testCase_list
 
