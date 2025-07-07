@@ -149,6 +149,7 @@ def generate_test_cases_from_requirements(list_of_requirements: list, context: s
     except json.JSONDecodeError as e:
         print(f"AI failed to generate appropriate JSON error: {e}")
         print(repr(output_testCase_string))
+        output_testCase_list = None
 
 
     return output_testCase_list
