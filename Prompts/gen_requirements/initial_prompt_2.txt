@@ -2,22 +2,15 @@ Now, follow these steps to extract and compile the requirements:
 
 1. Thoroughly analyze the document, paying close attention to explicit and implicit requirements. Look for statements that describe system functionality, user interactions, performance expectations, security measures, and any other aspects of the project.
 
-2. Categorize the requirements into appropriate groups such as:
-   - Functional Requirements
-   - Non-Functional Requirements (Performance, Security, Usability, etc.)
-   - Technical Requirements
-   - Business Requirements
-   - User Requirements
-
 3. For each requirement you make it into a dict of 4 keys:
-   - Assign a unique identifier (e.g., REQ-001, REQ-002)
-   - Write a clear, concise description
-   - Note the category it belongs to
+   - ID: Assign a unique identifier (e.g., REQ-001, REQ-002)
+   - Descriptipm: Write a clear, concise description
+   - Category Note the category it belongs to (Functional, Non-Functional, Technical, Business, User)
    - Note any dependencies on other requirements. If none, write "N/A"
 
-4. Insert the newly created requirement dict into a Python list
+3. Insert the newly created requirement dict into a Python list
 
-5. Be exhaustive in your analysis. Consider all aspects of the project, including:
+4. Be exhaustive in your analysis. Consider all aspects of the project, including:
    - User interfaces and interactions
    - Data processing and storage
    - System integrations
@@ -27,7 +20,7 @@ Now, follow these steps to extract and compile the requirements:
    - Error handling and system resilience
    - Scalability and future expansion
 
-6. Format your list of requirements in a Python List ONLY. Make sure to make the List correct as your string output will be directly transformed into a List object in Python program.
+5. Format your list of requirements in a Python List ONLY. Make sure to make the List correct as your string output will be directly transformed into a List object in Python program.
 
-7. After compiling the list, review it to ensure you haven't missed any critical aspects of the project.
+6. After compiling the list, review it to ensure you haven't missed any critical aspects of the project.
 Remember, the quality and completeness of this requirements list will directly impact the effectiveness of future testing efforts. Be as thorough and precise as possible.

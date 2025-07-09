@@ -52,7 +52,7 @@ def generate_test_cases_from_requirements(list_of_requirements: list, context: s
         initPrompt_1 = f.read()
 
     with open(path_to_initPrompt_2,"r") as f:
-        initPrompt_2 = f.read()\
+        initPrompt_2 = f.read()
         
         
     content_prompt_initial = [
@@ -135,15 +135,15 @@ def generate_test_cases_from_requirements(list_of_requirements: list, context: s
     4. Invoke
     """
     langchainConfig_messages = graph.invoke({"messages": []})
-    for message in langchainConfig_messages['messages']:
-        print(message)
+
 
     """
     5. Output Parsing
     """
-    
     output_testCase_string = langchainConfig_messages['messages'][-1].content
-    
+    print(output_testCase_string)
+
+    output_testCase_list = []
     try:
         output_testCase_list = json.loads(output_testCase_string)
     except json.JSONDecodeError as e:
