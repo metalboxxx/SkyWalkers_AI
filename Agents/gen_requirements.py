@@ -108,19 +108,16 @@ def generate_requirements_from_doc(path_to_document_pdf: str) -> tuple[list,str]
     """
     def write_initial_draft(state: AgentState):
         model_response = llm.invoke([HumanMessage(content=content_prompt_initial)])
-        
         return {"messages": [HumanMessage(content=content_prompt_initial), model_response]}
         
     def write_reflection_and_final(state: AgentState):
         prompt_messages = state['messages'] + [HumanMessage(content=content_prompt_reflection_and_rewrite)]
         model_response = llm.invoke(prompt_messages)
-
         return{"messages": [HumanMessage(content=content_prompt_reflection_and_rewrite), model_response]}
 
     def write_summary(state: AgentState):
         prompt_messages = state['messages'] + [HumanMessage(content=content_prompt_summary)] + [AIMessage(content="[")]
         model_response = llm.invoke(prompt_messages)
-
         return{"messages": [HumanMessage(content=content_prompt_summary), model_response]}
 
     """

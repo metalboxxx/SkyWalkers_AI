@@ -14,7 +14,7 @@ from langchain_core.tools import tool, InjectedToolCallId
 
 from gen_test_cases import generate_test_cases_from_requirements
 from gen_requirements import generate_requirements_from_doc 
-
+from find_requirements_by_description import requirement_info_from_description
 load_dotenv()
 llm_api_key = os.getenv("GOOGLE_API_KEY")
 
@@ -49,6 +49,7 @@ def generate_requirements_from_document_pdf_tool(
     - Decodes the PDF document from input path into base64 string.
     - Analyzes the document content to extract project requirements.
     - Generates a summary of the document.
+    - This will overwrite everything in state["requirements"]. Refer to other tools if the user wants addition.
 
     **Outputs:**
     - Updates `state["context"]` with the extracted summary.
@@ -86,6 +87,7 @@ def generate_testCases_fromRequirements_tool(
     - If `requirements` or `context` are missing, returns an error message.
     - Processes requirements to generate structured test cases.
     - Returns a list of test cases in `state["testCases"]`.
+    - This will overwrite everything in state["testCases"]. Refer to other tools if the user wants addition.
 
     **Outputs:**
     - Updates `state["testCases"]` with generated test cases.
@@ -112,7 +114,34 @@ def generate_testCases_fromRequirements_tool(
             )
         ]
     })
+
+@tool
+def requirement_info_from_description_tool(
+    state: Annotated[AgentState, InjectedState],
+    description: Annotated[str,"The descrption that the tool based on to find full information"]
+) -> Command:
+    """
+    Inquiry full information of requirements that meets the description"
     
+    **Inputs:**
+    - description: The description of the requirement that the tool will try to find and parse information"
+
+    **Behavior:**
+    - Looks through all the requirements in the state['requirements']
+    - Parse full infomation of the requirements that aligns with the given description into ToolMessage()
+    - If no requirement is found, report back 
+
+    **Outputs:**
+    - Adds a Tool message to `state["messages"]`. If successful, the tool message is information of the aligned requirements, else the message is a fail report.
+    """
+    if state.get('requirements') is None:
+        return Command(update={{"messages": [ToolMessage(content="There are no requirements found in the workspace")]}})
+    tool_answer_string = requirement_info_from_description(description, state['requirements'])
+    return Command(update={{"messages": [ToolMessage(content=tool_answer_string)]}})
+
+
+
+
 tools = [generate_testCases_fromRequirements_tool,
          generate_requirements_from_document_pdf_tool]
 llm_with_tools = llm.bind_tools(tools)
