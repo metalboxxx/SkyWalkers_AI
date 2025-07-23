@@ -118,10 +118,11 @@ def generate_testCases_fromRequirements_tool(
 @tool
 def requirement_info_from_description_tool(
     state: Annotated[AgentState, InjectedState],
+    tool_call_id: Annotated[str, InjectedToolCallId],
     description: Annotated[str,"The descrption that the tool based on to find full information"]
 ) -> Command:
     """
-    Inquiry full information of requirements that meets the description"
+    Inquiry requirements that meets the description and get the full information of those requirements"
     
     **Inputs:**
     - description: The description of the requirement that the tool will try to find and parse information"
@@ -132,14 +133,12 @@ def requirement_info_from_description_tool(
     - If no requirement is found, report back 
 
     **Outputs:**
-    - Adds a Tool message to `state["messages"]`. If successful, the tool message is information of the aligned requirements, else the message is a fail report.
+    - Adds a Tool message to `state["messages"]`. If successful, the tool message is a list containing dictionaries of the aligned requirements, else the message is a empty list.
     """
     if state.get('requirements') is None:
         return Command(update={{"messages": [ToolMessage(content="There are no requirements found in the workspace")]}})
     tool_answer_string = requirement_info_from_description(description, state['requirements'])
-    return Command(update={{"messages": [ToolMessage(content=tool_answer_string)]}})
-
-
+    return Command(update={{"messages": [ToolMessage(content=tool_answer_string, tool_call_id=tool_call_id)]}})
 
 
 tools = [generate_testCases_fromRequirements_tool,
