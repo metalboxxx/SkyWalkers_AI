@@ -122,7 +122,7 @@ def requirement_info_from_description_tool(
     description: Annotated[str,"The descrption that the tool based on to find full information"]
 ) -> Command:
     """
-    Inquiry requirements that meets the description and get the full information of those requirements"
+    Inquiry requirements that meets the description and get the full information of those requirements (ID, description,priority , dependency)"
     
     **Inputs:**
     - description: The description of the requirement that the tool will try to find and parse information"
@@ -136,9 +136,61 @@ def requirement_info_from_description_tool(
     - Adds a Tool message to `state["messages"]`. If successful, the tool message is a list containing dictionaries of the aligned requirements, else the message is a empty list.
     """
     if state.get('requirements') is None:
-        return Command(update={{"messages": [ToolMessage(content="There are no requirements found in the workspace")]}})
+        return Command(update={{"messages": [ToolMessage(content="There are not yet requirement in the workspace")]}})
     tool_answer_string = requirement_info_from_description(description, state['requirements'])
     return Command(update={{"messages": [ToolMessage(content=tool_answer_string, tool_call_id=tool_call_id)]}})
+
+
+@tool
+def change_requirement_info(
+    state: Annotated[AgentState, InjectedState],
+    tool_call_id: Annotated[str, InjectedToolCallId],
+    req_id: Annotated[str,"The ID of the requirement that needs change"],
+    attribute: Annotated[str,'The attribute of the requirement that needs change'],
+    value: Annotated[str,'The value that the attribute of a requirement will change into']
+) -> Command:
+    """
+    Change the information of a requirement, or technically change the one attribute value from a requirement
+
+    **Input**
+    - req_id: The ID of the requirement. The tool use this to find the targeted requirement
+    - attribute: The attribute inside the requirement dictionary that needs change. The tool will check if the attribute is one of the keys
+    - value: 'The value that the attribute of a requirement will change into'
+
+    **Behavior**
+    - The tool finds that requirement using its ID by searching the dictionary in the list that has that ID.
+    - The tool parse the values from the parameters into a conventional way to change value in Python list.
+    - The tool will check if that requirement/attribute exisits. If not return an error ToolMessage
+
+    **Output**
+    - Updates state['requirements'] with the modified requirement
+    - Add a successful ToolMessage
+
+    **Note**
+    - Requires exisiting requirement to utilize this tool
+    - Can use other tools to locate the ID if the user is using natural language to describe the requirement. Then use that tool result to parse onto this tool
+    """
+    if state.get('requirements') is None:
+        return Command(update={{"messages": [ToolMessage(content="There are not yet requirements in the workspace")]}})
+    
+    import copy
+    requirements_copy = copy.deepcopy(state['requirements'])
+    if any(requirement.get("ID") == req_id for requirement in requirements_copy):
+        for req in requirements_copy:
+            if req['ID'] == req_id:
+                req[attribute] = value
+                break
+        return Command(update={
+        "requirements": requirements_copy,
+        "messages": [ToolMessage(
+                "Successfully modify the requirement",
+                tool_call_id=tool_call_id
+                )]
+            })
+    else:
+        return Command(update={"messages":[ToolMessage(content="Invalid key value")]})  
+
+
 
 
 tools = [generate_testCases_fromRequirements_tool,

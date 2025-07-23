@@ -5,8 +5,8 @@ Now, follow these steps to extract and compile the requirements:
 3. For each requirement you make it into a dict of 4 keys:
    - ID: Assign a unique identifier (e.g., REQ-001, REQ-002)
    - Descriptipm: Write a clear, concise description
-   - Category Note the category it belongs to (Functional, Non-Functional, Technical, Business, User)
-   - Note any dependencies on other requirements. If none, write "N/A"
+   - Category: Note the category it belongs to (Functional, Non-Functional, Technical, Business, User)
+   - Dependency: Note any dependencies on other requirements. If none, write "N/A"
 
 3. Insert the newly created requirement dict into a Python list
 
