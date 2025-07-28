@@ -1,5 +1,6 @@
 from dotenv import load_dotenv
 import os
+import copy
 
 from typing import TypedDict, Annotated, Optional
 from langgraph.checkpoint.memory import MemorySaver
@@ -138,11 +139,11 @@ def requirement_info_from_description_tool(
     if state.get('requirements') is None:
         return Command(update={{"messages": [ToolMessage(content="There are not yet requirement in the workspace")]}})
     tool_answer_string = requirement_info_from_description(description, state['requirements'])
-    return Command(update={{"messages": [ToolMessage(content=tool_answer_string, tool_call_id=tool_call_id)]}})
+    return Command(update={"messages": [ToolMessage(content=tool_answer_string, tool_call_id=tool_call_id)]})
 
 
 @tool
-def change_requirement_info(
+def change_requirement_info_tool(
     state: Annotated[AgentState, InjectedState],
     tool_call_id: Annotated[str, InjectedToolCallId],
     req_id: Annotated[str,"The ID of the requirement that needs change"],
@@ -173,7 +174,6 @@ def change_requirement_info(
     if state.get('requirements') is None:
         return Command(update={{"messages": [ToolMessage(content="There are not yet requirements in the workspace")]}})
     
-    import copy
     requirements_copy = copy.deepcopy(state['requirements'])
     if any(requirement.get("ID") == req_id for requirement in requirements_copy):
         for req in requirements_copy:
@@ -181,11 +181,10 @@ def change_requirement_info(
                 req[attribute] = value
                 break
         return Command(update={
-        "requirements": requirements_copy,
-        "messages": [ToolMessage(
+            "requirements": requirements_copy,
+            "messages": [ToolMessage(
                 "Successfully modify the requirement",
-                tool_call_id=tool_call_id
-                )]
+                tool_call_id=tool_call_id)]
             })
     else:
         return Command(update={"messages":[ToolMessage(content="Invalid key value")]})  
@@ -194,7 +193,7 @@ def change_requirement_info(
 
 
 tools = [generate_testCases_fromRequirements_tool,
-         generate_requirements_from_document_pdf_tool]
+         generate_requirements_from_document_pdf_tool,requirement_info_from_description_tool,change_requirement_info_tool]
 llm_with_tools = llm.bind_tools(tools)
 tools_node = ToolNode(tools)
 
