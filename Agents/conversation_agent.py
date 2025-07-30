@@ -43,9 +43,6 @@ def generate_requirements_from_document_pdf_tool(
     """
     Extracts a brief summary and a list of requirements from a project document.
 
-    **Inputs:**
-    - `x` (str): The PATH to the pdf document
-    
     **Behavior:**
     - Decodes the PDF document from input path into base64 string.
     - Analyzes the document content to extract project requirements.
@@ -100,7 +97,7 @@ def generate_testCases_fromRequirements_tool(
         return Command(update={
             "messages": [
             ToolMessage(
-                "Requirements or Context missing",
+                "Requirements or Context is missing in the workspace",
                 tool_call_id=tool_call_id
             )
         ]
@@ -117,46 +114,72 @@ def generate_testCases_fromRequirements_tool(
     })
 
 @tool
-def requirement_info_from_description_tool(
+def get_requirement_info_from_description_tool(
     state: Annotated[AgentState, InjectedState],
     tool_call_id: Annotated[str, InjectedToolCallId],
     description: Annotated[str,"The descrption that the tool based on to find full information"]
 ) -> Command:
     """
-    Inquiry requirements that meets the description and get the full information of those requirements (ID, description,priority , dependency)"
+    Inquiry requirements that meets the description and get the full information of those requirements (ID, description,priority , dependency)
     
-    **Inputs:**
-    - description: The description of the requirement that the tool will try to find and parse information"
-
     **Behavior:**
-    - Looks through all the requirements in the state['requirements']
-    - Parse full infomation of the requirements that aligns with the given description into ToolMessage()
-    - If no requirement is found, report back 
+    - Another LLM looks through all the requirements information in the state['requirements']
+    - That LLM parse full infomation of the requirements that it thinks align with the given description.
 
     **Outputs:**
     - Adds a Tool message to `state["messages"]`. If successful, the tool message is a list containing dictionaries of the aligned requirements, else the message is a empty list.
+    
+    **Note**
+    - This tool uses LLM to locate the requirement, thus, resource intensive. If it is possible to locate the requirement without natural language processing, use the other way or tool.
+    
     """
     if state.get('requirements') is None:
         return Command(update={{"messages": [ToolMessage(content="There are not yet requirement in the workspace")]}})
     tool_answer_string = requirement_info_from_description(description, state['requirements'])
     return Command(update={"messages": [ToolMessage(content=tool_answer_string, tool_call_id=tool_call_id)]})
 
+@tool
+def get_requirement_info_by_lookup_tool(
+    state: Annotated[AgentState, InjectedState],
+    tool_call_id: Annotated[str, InjectedToolCallId],
+    target_key: Annotated[str, 'The dictionary key of which value is to be look upon'],
+    target_value: Annotated[str,'The value in the dictionary is to be look upon']
+) -> Command:
+    """
+    Inquiry the requirements that match with the target key-value and get the full information of those requirements (ID, description, priority, dependency)
+
+    **Behavior**
+    - Use standard Python code to find which requirement in the requirement list has the matching key-value in the parameter. Can be more than 1 dictionary
+    Code: matching_dicts = [ d for d in requirements if any(k.lower() == target_key.lower() and str(v).lower() == str(target_value).lower() for k, v in d.items())]
+    
+    **Outputs:**
+    - Adds a Tool message to `state["messages"]`. If successful, the tool message is a list containing dictionaries of the aligned requirements, else the message is a empty list.
+    
+    **Note**
+    - Since you will be directly inserting into python function, it is crucial to spell the key and value accurately. 
+    - For reference, requirement dictionary has 4 keys which are "ID","Description","Category","Dependency"
+    - The "Category" key has these possible values : "Functional", "Non-Functional", "Technical", "Business", "User". The other keys have very flexible values so it might be normal to return empty list.
+    - It is recommended to use get_requirement_info_from_description_tool when dealing with umabiquious locating request.
+    """
+    if state.get('requirements') is None:
+        return Command(update={{"messages": [ToolMessage(content="There are not yet requirements in the workspace")]}})
+    
+    requirements = state['requirements']
+    if not(any(target_key in d for d in requirements)):
+        return Command(update={"messages": [ToolMessage(content="Your input key is invalid")]})
+    matching_dicts = [ d for d in requirements if any(k.lower() == target_key.lower() and str(v).lower() == str(target_value).lower() for k, v in d.items())]
+    return Command(update={"messages": [ToolMessage(content=str(matching_dicts,tool_call_id=tool_call_id))]})
 
 @tool
 def change_requirement_info_tool(
     state: Annotated[AgentState, InjectedState],
     tool_call_id: Annotated[str, InjectedToolCallId],
-    req_id: Annotated[str,"The ID of the requirement that needs change"],
-    attribute: Annotated[str,'The attribute of the requirement that needs change'],
-    value: Annotated[str,'The value that the attribute of a requirement will change into']
+    req_id: Annotated[str,"The ID of the requirement that needs change. The tool use this to find the targeted requirement"],
+    attribute: Annotated[str,'The attribute inside the requirement dictionary that needs change. Make sure it is one of the dict keys'],
+    value: Annotated[str,'The value that the attribute of the requirement will change into']
 ) -> Command:
     """
-    Change the information of a requirement, or technically change the one attribute value from a requirement
-
-    **Input**
-    - req_id: The ID of the requirement. The tool use this to find the targeted requirement
-    - attribute: The attribute inside the requirement dictionary that needs change. The tool will check if the attribute is one of the keys
-    - value: 'The value that the attribute of a requirement will change into'
+    Change the information of a requirement, or technically change the one attribute value from a requirement list
 
     **Behavior**
     - The tool finds that requirement using its ID by searching the dictionary in the list that has that ID.
@@ -169,7 +192,7 @@ def change_requirement_info_tool(
 
     **Note**
     - Requires exisiting requirement to utilize this tool
-    - Can use other tools to locate the ID if the user is using natural language to describe the requirement. Then use that tool result to parse onto this tool
+    - Can use other tools to locate the requirement ID if the user is using natural language to describe the requirement. Then use that tool result to parse onto this tool
     """
     if state.get('requirements') is None:
         return Command(update={{"messages": [ToolMessage(content="There are not yet requirements in the workspace")]}})
@@ -192,8 +215,9 @@ def change_requirement_info_tool(
 
 
 
-tools = [generate_testCases_fromRequirements_tool,
-         generate_requirements_from_document_pdf_tool,requirement_info_from_description_tool,change_requirement_info_tool]
+tools = [generate_testCases_fromRequirements_tool, generate_requirements_from_document_pdf_tool, 
+         get_requirement_info_from_description_tool,change_requirement_info_tool, 
+         get_requirement_info_by_lookup_tool]
 llm_with_tools = llm.bind_tools(tools)
 tools_node = ToolNode(tools)
 
