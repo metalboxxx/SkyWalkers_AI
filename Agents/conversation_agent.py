@@ -134,7 +134,7 @@ def get_requirement_info_from_description_tool(
     
     """
     if state.get('requirements') is None:
-        return Command(update={{"messages": [ToolMessage(content="There are not yet requirement in the workspace")]}})
+        return Command(update={"messages": [ToolMessage(content="There are not yet requirement in the workspace")]})
     tool_answer_string = requirement_info_from_description(description, state['requirements'])
     return Command(update={"messages": [ToolMessage(content=tool_answer_string, tool_call_id=tool_call_id)]})
 
@@ -160,15 +160,16 @@ def get_requirement_info_by_lookup_tool(
     - For reference, requirement dictionary has 4 keys which are "ID","Description","Category","Dependency"
     - The "Category" key has these possible values : "Functional", "Non-Functional", "Technical", "Business", "User". The other keys have very flexible values so it might be normal to return empty list.
     - It is recommended to use get_requirement_info_from_description_tool when dealing with umabiquious locating request.
+    - Don't need confirmation for this tool
     """
     if state.get('requirements') is None:
-        return Command(update={{"messages": [ToolMessage(content="There are not yet requirements in the workspace")]}})
+        return Command(update={"messages": [ToolMessage(content="There are not yet requirements in the workspace")]})
     
     requirements = state['requirements']
     if not(any(target_key in d for d in requirements)):
-        return Command(update={"messages": [ToolMessage(content="Your input key is invalid")]})
+        return Command(update={"messages": [ToolMessage(content="Your input key is invalid",tool_call_id=tool_call_id)]})
     matching_dicts = [ d for d in requirements if any(k.lower() == target_key.lower() and str(v).lower() == str(target_value).lower() for k, v in d.items())]
-    return Command(update={"messages": [ToolMessage(content=str(matching_dicts,tool_call_id=tool_call_id))]})
+    return Command(update={"messages": [ToolMessage(content=str(matching_dicts),tool_call_id=tool_call_id)]})
 
 @tool
 def change_requirement_info_tool(
@@ -195,7 +196,7 @@ def change_requirement_info_tool(
     - Can use other tools to locate the requirement ID if the user is using natural language to describe the requirement. Then use that tool result to parse onto this tool
     """
     if state.get('requirements') is None:
-        return Command(update={{"messages": [ToolMessage(content="There are not yet requirements in the workspace")]}})
+        return Command(update={"messages": [ToolMessage(content="There are not yet requirements in the workspace")]})
     
     requirements_copy = copy.deepcopy(state['requirements'])
     if any(requirement.get("ID") == req_id for requirement in requirements_copy):
